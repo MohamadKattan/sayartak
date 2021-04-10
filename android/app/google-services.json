@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "633382620039",
+    "project_id": "syartak-1fb8d",
+    "storage_bucket": "syartak-1fb8d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633382620039:android:4e964a7c2047d8132ae122",
+        "android_client_info": {
+          "package_name": "com.kattanSoftware.sayartak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633382620039-k3skos22srfcnbllajg760at82iogvh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzTo-iddYCr45VSN5UcstoEpqI2-yuIXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633382620039-k3skos22srfcnbllajg760at82iogvh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
