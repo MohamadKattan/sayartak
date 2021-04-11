@@ -288,8 +288,8 @@ class _AddScreenState extends State<AddScreen> {
                               },
                               items: <String>[
                                 'select',
-                                'New car',
-                                'Used car'
+                                'newCar',
+                                'usedCar',
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
@@ -475,16 +475,16 @@ class _AddScreenState extends State<AddScreen> {
         "carId": carId,
         "image": url,
         "video": null,
-        "brand": brandTextEditingController.text.trim(),
-        "model": modelTextEditingController.text.trim(),
-        "city": cityTextEditingController.text.trim(),
-        "color": colorTextEditingController.text.trim(),
-        "price": priceTextEditingController.text.trim(),
-        "km": kmTextEditingController.text.trim(),
-        "phone": phoneTextEditingController.text.trim(),
-        "gaz": gazTextEditingController.text.trim(),
-        "gear": gearTextEditingController.text.trim(),
-        "not": notTextEditingController.text.trim(),
+        "brand": brandTextEditingController.text,
+        "model": modelTextEditingController.text,
+        "city": cityTextEditingController.text,
+        "color": colorTextEditingController.text,
+        "price": priceTextEditingController.text,
+        "km": kmTextEditingController.text,
+        "phone": phoneTextEditingController.text,
+        "gaz": gazTextEditingController.text,
+        "gear": gearTextEditingController.text,
+        "not": notTextEditingController.text,
         "statusCar": dropdownValue.toString(),
         "installment": null,
       });

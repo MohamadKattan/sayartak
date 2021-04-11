@@ -5,7 +5,7 @@ import 'package:sayartak/model/sale_car_model.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class NewCarScreen extends StatelessWidget {
+class UsedCarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CollectionReference car = FirebaseFirestore.instance.collection('saleCar');
@@ -13,7 +13,7 @@ class NewCarScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black87,
-          title: Text("New Car"),
+          title: Text("Used Car"),
           centerTitle: false,
           actions: [
             IconButton(
@@ -22,7 +22,7 @@ class NewCarScreen extends StatelessWidget {
           ],
         ),
         body: StreamBuilder<QuerySnapshot>(
-            stream: car.where("statusCar", isEqualTo: "newCar").snapshots(),
+            stream: car.where("statusCar", isNotEqualTo: "newCar").snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
@@ -30,6 +30,9 @@ class NewCarScreen extends StatelessWidget {
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return CustomCircular();
+              }
+              if (!snapshot.hasData) {
+                Center(child: Text("No data yet"));
               }
               return new ListView(
                 children: snapshot.data.docs.map((DocumentSnapshot document) {
@@ -86,7 +89,7 @@ class NewCarScreen extends StatelessWidget {
                                     placeholder: kTransparentImage,
                                     image: saleCar.image)),
                           ),
-                          Text(saleCar.statusCar.toString()),
+                          Text("${saleCar.statusCar}"),
                           Row(
                             children: [
                               Icon(Icons.directions_car),
