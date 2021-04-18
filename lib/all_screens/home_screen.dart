@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sayartak/all_screens/main_screen.dart';
 import 'package:sayartak/widget/customDrawer.dart';
 import 'package:foldable_sidebar/foldable_sidebar.dart';
-class HomeScreen extends StatefulWidget {
-  static const String screenId = "HomeScreen";
 
+class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

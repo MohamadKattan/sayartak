@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:sayartak/all_screens/login_screen.dart';
 import 'package:sayartak/all_screens/profile_screen.dart';
+import 'package:sayartak/confige.dart';
 
 class CustomDrawer extends StatelessWidget {
   final Function closeDrawer;
-
   const CustomDrawer({Key key, this.closeDrawer}) : super(key: key);
 
   @override
@@ -17,7 +19,7 @@ class CustomDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width,
               height: 150,
               color: Colors.black,
               child: Padding(
@@ -26,21 +28,28 @@ class CustomDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    CircleAvatar(radius: 35.0,
-                      backgroundImage:AssetImage("images/splash.png",)
-                    ),
-                    Text("Welcome :",style: TextStyle(fontSize: 16.0,color: Colors.white)),
+                    CircleAvatar(
+                        radius: 35.0,
+                        backgroundImage: AssetImage(
+                          "images/splash.png",
+                        )),
+                    Text("Welcome :",
+                        style: TextStyle(fontSize: 16.0, color: Colors.white)),
                     SizedBox(
                       height: 4,
                     ),
-                    Text("MohamadKattan",style: TextStyle(fontSize: 18.0,color: Colors.white),)
+                    Text(
+                      "Mohamad",
+                      style: TextStyle(fontSize: 18.0, color: Colors.white),
+                    )
                   ],
                 ),
               )),
           ListTile(
             onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
-            closeDrawer();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()));
+              closeDrawer();
             },
             leading: Icon(Icons.person),
             title: Text(
@@ -86,7 +95,8 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              debugPrint("Tapped Log Out");
+              singOut();
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginScreen()), (route) => false);
             },
             leading: Icon(Icons.exit_to_app),
             title: Text("Log Out"),
@@ -94,5 +104,14 @@ class CustomDrawer extends StatelessWidget {
         ],
       ),
     );
+
   }
+  Future<void>singOut()async{
+      try{
+        await auth.signOut();
+        await googleSignIn.signOut();
+       await FacebookAuth.instance.logOut();
+      }catch(ex){print("errorGoogleSingOut::"+ex.toString());}
+  }
+
 }

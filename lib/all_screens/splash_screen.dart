@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sayartak/all_screens/home_screen.dart';
+import 'package:sayartak/all_screens/login_screen.dart';
+import 'package:sayartak/confige.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String screenId = "SplashScreen";
@@ -14,18 +16,17 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 4),
-      lowerBound: 0.3,
-        upperBound: 0.9
-    );
+        vsync: this,
+        duration: const Duration(seconds: 4),
+        lowerBound: 0.3,
+        upperBound: 0.9);
     _animationController.forward();
-    _animationController.addStatusListener((status){
-      if(status==AnimationStatus.completed){
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) {
-            return HomeScreen();
+            return auth.currentUser == null ? LoginScreen() : HomeScreen();
           }),
         );
       }

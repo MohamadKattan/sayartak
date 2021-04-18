@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sayartak/model/sale_car_model.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_dialog.dart';
 import 'package:sayartak/widget/custom_drop_button.dart';

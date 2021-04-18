@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
-Widget customTextField
-    ({
+Widget customTextField({
   TextEditingController controller,
   String labelText,
   TextInputType textInputType,
   int maxLines,
   int minLines,
   String errorText,
-  int maxLength ,
-   })
-{
+  int maxLength,
+  bool obscureText=false,
+}) {
   return Padding(
-    padding:  EdgeInsets.all(8.0),
+    padding: EdgeInsets.all(8.0),
     child: TextField(
       controller: controller,
       decoration: InputDecoration(
@@ -25,10 +24,11 @@ Widget customTextField
         labelStyle: TextStyle(color: Colors.grey, fontSize: 14),
       ),
       keyboardType: textInputType,
+      obscureText: obscureText,
       style: TextStyle(color: Colors.black, fontSize: 16),
       maxLines: maxLines,
       minLines: minLines,
-      maxLength:maxLength,
+      maxLength: maxLength,
     ),
   );
 }

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "633382620039-h2etr7088rs4ecnlkfjpp3sig9nq1k70.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kattanSoftware.sayartak",
+            "certificate_hash": "31b8f0aaa0639df2170d1228a515c4ef7b392c29"
+          }
+        },
+        {
           "client_id": "633382620039-k3skos22srfcnbllajg760at82iogvh9.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sayartak/model/sale_car_model.dart';
+import 'package:sayartak/provider/addCar.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -34,6 +36,7 @@ class NewCarScreen extends StatelessWidget {
               return new ListView(
                 children: snapshot.data.docs.map((DocumentSnapshot document) {
                   SaleCar saleCar = SaleCar.fromMap(document.data());
+                  Provider.of<AddCar>(context,listen: false).updateAddCar(saleCar);
                   return carList(context, saleCar);
                 }).toList(),
               );

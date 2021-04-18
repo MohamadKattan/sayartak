@@ -61,7 +61,9 @@ class CustomDialog extends StatelessWidget {
                         color: Colors.black,
                         fontSize: 20.0,
                         fontWeight: FontWeight.w500))),
-            SizedBox(height: 20.0,),
+            SizedBox(
+              height: 20.0,
+            ),
             GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
@@ -75,8 +77,8 @@ class CustomDialog extends StatelessWidget {
                               offset: Offset(0.7, 0.7))
                         ],
                         color: Colors.redAccent[700]),
-                    height: MediaQuery.of(context).size.height*5/100,
-                    width: MediaQuery.of(context).size.width*25/100,
+                    height: MediaQuery.of(context).size.height * 5 / 100,
+                    width: MediaQuery.of(context).size.width * 25 / 100,
                     child: Center(
                       child: Text("Cancel",
                           style: TextStyle(
