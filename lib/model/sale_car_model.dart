@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SaleCar {
-  String carId;
   String video;
   String image;
   String brand;
@@ -16,8 +15,10 @@ class SaleCar {
   String not;
   String installment;
   String statusCar;
+  String postId;
   SaleCar(
-      {this.carId,
+      {
+        this.postId,
       this.brand,
       this.city,
       this.color,
@@ -33,7 +34,7 @@ class SaleCar {
       this.price,
       this.video});
 SaleCar.fromMap(Map<String, dynamic> mapData) {
-      carId= mapData['carId'];
+      postId=mapData['postId'];
       video= mapData['video'];
       image= mapData['image'];
       brand= mapData['brand'];

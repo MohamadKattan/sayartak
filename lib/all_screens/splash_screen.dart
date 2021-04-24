@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sayartak/all_screens/home_screen.dart';
 import 'package:sayartak/all_screens/login_screen.dart';
 import 'package:sayartak/confige.dart';
+import 'package:sayartak/service/auth_service.dart';
+
 
 class SplashScreen extends StatefulWidget {
-  static const String screenId = "SplashScreen";
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -31,6 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
         );
       }
     });
+    AuthService.getCurrentUser(context);
     super.initState();
   }
 

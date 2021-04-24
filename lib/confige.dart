@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 final FirebaseAuth auth = FirebaseAuth.instance;
 GoogleSignIn googleSignIn = GoogleSignIn();
 User currentUser;
@@ -13,4 +12,18 @@ final ScrollController scrollController = ScrollController();
 TextEditingController nameTextEditingController = TextEditingController();
 TextEditingController emailTextEditingController = TextEditingController();
 TextEditingController passWordTextEditingController = TextEditingController();
-
+///here for add car
+CollectionReference saleCarReference = FirebaseFirestore.instance.collection('saleCar');
+TextEditingController brandTextEditingController = TextEditingController();
+TextEditingController modelTextEditingController = TextEditingController();
+TextEditingController cityTextEditingController = TextEditingController();
+TextEditingController gearTextEditingController = TextEditingController();
+TextEditingController colorTextEditingController = TextEditingController();
+TextEditingController gazTextEditingController = TextEditingController();
+TextEditingController kmTextEditingController = TextEditingController();
+TextEditingController priceTextEditingController = TextEditingController();
+TextEditingController phoneTextEditingController = TextEditingController();
+TextEditingController notTextEditingController = TextEditingController();
+final TextEditingController maxWidthController = TextEditingController();
+final TextEditingController maxHeightController = TextEditingController();
+final TextEditingController qualityController = TextEditingController();

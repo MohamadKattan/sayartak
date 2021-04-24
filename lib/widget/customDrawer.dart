@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:sayartak/all_screens/login_screen.dart';
+import 'package:sayartak/all_screens/my_car.dart';
 import 'package:sayartak/all_screens/profile_screen.dart';
 import 'package:sayartak/confige.dart';
 
@@ -39,8 +40,9 @@ class CustomDrawer extends StatelessWidget {
                       height: 4,
                     ),
                     Text(
-                      "Mohamad",
-                      style: TextStyle(fontSize: 18.0, color: Colors.white),
+                      currentUser.displayName!=null?
+                      "${currentUser.displayName}":"${currentUser.email}",
+                      style: TextStyle(fontSize: 16.0, color: Colors.white),
                     )
                   ],
                 ),
@@ -83,11 +85,10 @@ class CustomDrawer extends StatelessWidget {
             color: Colors.grey,
           ),
           ListTile(
-            onTap: () {
-              debugPrint("Tapped Notifications");
-            },
-            leading: Icon(Icons.notifications),
-            title: Text("Notifications"),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MyCars())),
+            leading: Icon(Icons.auto_awesome_motion),
+            title: Text("My cars"),
           ),
           Divider(
             height: 1,
@@ -96,7 +97,10 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               singOut();
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginScreen()), (route) => false);
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  (route) => false);
             },
             leading: Icon(Icons.exit_to_app),
             title: Text("Log Out"),
@@ -104,14 +108,16 @@ class CustomDrawer extends StatelessWidget {
         ],
       ),
     );
-
-  }
-  Future<void>singOut()async{
-      try{
-        await auth.signOut();
-        await googleSignIn.signOut();
-       await FacebookAuth.instance.logOut();
-      }catch(ex){print("errorGoogleSingOut::"+ex.toString());}
   }
 
+  Future<void> singOut() async {
+    try {
+      await auth.signOut();
+      await googleSignIn.disconnect();
+      await googleSignIn.signOut();
+      await FacebookAuth.instance.logOut();
+    } catch (ex) {
+      print("errorGoogleSingOut::" + ex.toString());
+    }
+  }
 }

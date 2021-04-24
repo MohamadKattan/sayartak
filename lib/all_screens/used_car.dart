@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sayartak/all_screens/car_details.dart';
 import 'package:sayartak/model/sale_car_model.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -52,76 +53,82 @@ class UsedCarScreen extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(right: 4.0, left: 4.0),
-              child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 30 / 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 6.0,
-                            spreadRadius: 0.4,
-                            offset: Offset(0.2, 0.4))
-                      ],
-                      color: Colors.white),
-                  child: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                ),
-                                height: MediaQuery.of(context).size.height *
-                                    15 /
-                                    100,
-                                width: MediaQuery.of(context).size.width *
-                                    30 /
-                                    100,
-                                child: FadeInImage.memoryNetwork(
-                                    fit: BoxFit.cover,
-                                    placeholder: kTransparentImage,
-                                    image: saleCar.image)),
-                          ),
-                          Text("${saleCar.statusCar}"),
-                          Row(
-                            children: [
-                              Icon(Icons.directions_car),
-                              Icon(Icons.ac_unit),
-                              Icon(Icons.add_location_rounded)
-                            ],
-                          )
+              child: GestureDetector(
+                onTap:(){
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => CarDetails(saleCarDetails: saleCar)));
+                },
+                child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 30 / 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black,
+                              blurRadius: 6.0,
+                              spreadRadius: 0.4,
+                              offset: Offset(0.2, 0.4))
                         ],
-                      ),
-                      SizedBox(
-                        width: 6.0,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Text(
-                                "Model : ${saleCar.brand} ${saleCar.model}",
+                        color: Colors.white),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.0)),
+                                  ),
+                                  height: MediaQuery.of(context).size.height *
+                                      15 /
+                                      100,
+                                  width: MediaQuery.of(context).size.width *
+                                      30 /
+                                      100,
+                                  child: FadeInImage.memoryNetwork(
+                                      fit: BoxFit.cover,
+                                      placeholder: kTransparentImage,
+                                      image: saleCar.image)),
+                            ),
+                            Text("${saleCar.statusCar}"),
+                            Row(
+                              children: [
+                                Icon(Icons.directions_car),
+                                Icon(Icons.ac_unit),
+                                Icon(Icons.add_location_rounded)
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          width: 6.0,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Text(
+                                  "Model : ${saleCar.brand} ${saleCar.model}",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18.0)),
+                            ),
+                            Text("City : ${saleCar.city}",
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 18.0)),
-                          ),
-                          Text("City : ${saleCar.city}",
-                              style: TextStyle(
-                                  color: Colors.grey, fontSize: 16.0)),
-                          Text("Km : ${saleCar.km}",
-                              style: TextStyle(
-                                  color: Colors.grey, fontSize: 16.0)),
-                        ],
-                      ),
-                    ],
-                  )),
+                                    color: Colors.grey, fontSize: 16.0)),
+                            Text("Km : ${saleCar.km}",
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 16.0)),
+                          ],
+                        ),
+                      ],
+                    )),
+              ),
             ),
             Positioned(
                 bottom: 0.0,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sayartak/all_screens/login_screen.dart';
-import 'package:sayartak/service/auth_email_pasWord.dart';
+import 'package:sayartak/service/auth_service.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
 import 'package:sayartak/confige.dart';
@@ -20,7 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   PickedFile photoFile;
   String userPhotoId = uuid.v4();
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
-  LoginByEmailAuth loginByEmailAuth = LoginByEmailAuth();
+  AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +117,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: EdgeInsets.all(8.0),
                     child: GestureDetector(
                         onTap: () async{
+                          setState(() {
+                            isLoading=true;
+                          });
                          await checkInfoInput(context).whenComplete((){
                            setState(() {
                              isLoading=false;
@@ -209,10 +212,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (passWordTextEditingController == null) {
       show("Email can\'t be empty");
     }else{
-      setState(() {
-        isLoading=true;
-      });
-      loginByEmailAuth.setPhotoUserTOStorage(photoFile,userPhotoId,context);
+
+      _authService.setPhotoUserTOStorage(photoFile,userPhotoId,context);
     }
 
   }

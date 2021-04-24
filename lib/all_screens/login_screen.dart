@@ -1,14 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/Registr_screen.dart';
 import 'package:sayartak/all_screens/home_screen.dart';
 import 'package:sayartak/confige.dart';
-import 'package:sayartak/provider/current_user_provider.dart';
-import 'package:sayartak/service/auth_email_pasWord.dart';
-import 'package:sayartak/service/facebooc_sing_in.dart';
-import 'package:sayartak/service/google_sing_in.dart';
+import 'package:sayartak/service/auth_service.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
 
@@ -19,9 +15,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
-  GoogleAuthSingIn _googleAuthSingIn = GoogleAuthSingIn();
-  LoginByEmailAuth _loginByEmailAuth = LoginByEmailAuth();
-  FaceBookSingIn _bookSingIn = FaceBookSingIn();
+  AuthService _authService = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           setState(() {
                             isLoading = true;
                           });
-                          await _googleAuthSingIn.signInWithGoogle();
+                          await _authService.signInWithGoogle(context);
                           pushToHomePage();
                         },
                         child: Container(
@@ -148,8 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           isLoading = true;
                         });
-                        await _bookSingIn
-                            .signInWithFacebook()
+                        await _authService
+                            .signInWithFacebook(context)
                             .whenComplete(() => pushToHomePage());
                       },
                       child: Container(
@@ -182,15 +177,8 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         isLoading = true;
       });
-      await _loginByEmailAuth.signIn(context);
+      await _authService.signIn(context);
     }
-  }
-
-  Future<User> getCurrentUser() async {
-    currentUser = auth.currentUser;
-    await Provider.of<CurrentUserProvider>(context, listen: false)
-        .getProviderCurrentUser(currentUser);
-    return currentUser;
   }
 
   Future<void> show(String msg) async {

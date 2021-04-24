@@ -1,11 +1,12 @@
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sayartak/all_screens/home_screen.dart';
+import 'package:sayartak/confige.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_dialog.dart';
 import 'package:sayartak/widget/custom_drop_button.dart';
@@ -21,32 +22,16 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
-  CollectionReference saleCar =
-      FirebaseFirestore.instance.collection('saleCar');
   final ImagePicker _picker = ImagePicker();
   GlobalKey<ScaffoldState> globalKey = GlobalKey();
-  TextEditingController brandTextEditingController = TextEditingController();
-  TextEditingController modelTextEditingController = TextEditingController();
-  TextEditingController cityTextEditingController = TextEditingController();
-  TextEditingController gearTextEditingController = TextEditingController();
-  TextEditingController colorTextEditingController = TextEditingController();
-  TextEditingController gazTextEditingController = TextEditingController();
-  TextEditingController kmTextEditingController = TextEditingController();
-  TextEditingController priceTextEditingController = TextEditingController();
-  TextEditingController phoneTextEditingController = TextEditingController();
-  TextEditingController notTextEditingController = TextEditingController();
-  final TextEditingController maxWidthController = TextEditingController();
-  final TextEditingController maxHeightController = TextEditingController();
-  final TextEditingController qualityController = TextEditingController();
-
   PickedFile _imageFile;
   PickedFile _videoFile;
   dynamic _pickImageError;
+  String carId = uuid.v1();
   bool isVideo = false;
   bool installment = false;
   bool isLoading = false;
   String dropdownValue = 'select';
-  String carId = uuid.v4();
 
   @override
   Widget build(BuildContext context) {
@@ -331,13 +316,7 @@ class _AddScreenState extends State<AddScreen> {
 // this method for check box
   void _manyTime(bool manyTimeOk) {
     setState(() {
-      installment = manyTimeOk;
-      if (installment) {
-        saleCar.add({"installment": "yes"});
-        print("to firebase update");
-      } else {
-        return null;
-      }
+      installment = true;
     });
   }
 
@@ -394,10 +373,6 @@ class _AddScreenState extends State<AddScreen> {
 // this method for check if verbill is not null
   void checkIfFieldNotEmpty() {
     try {
-      setState(() {
-        isLoading = true;
-      });
-
       if (_imageFile == null) {
         show("image can\'t be empty");
         // }else if(_videoFile==null){
@@ -446,6 +421,9 @@ class _AddScreenState extends State<AddScreen> {
 // this method for upload image to Storage
   Future<void> upLoadToStorage() async {
     try {
+      setState(() {
+        isLoading = true;
+      });
       firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
           .ref()
           .child('car')
@@ -464,14 +442,18 @@ class _AddScreenState extends State<AddScreen> {
 
   Future<void> downloadUrl(String url) async {
     print(url);
-    return await uploadToFirestore(url);
+    return await uploadToFirestore(
+      url,
+    );
   }
 
 // this method for upload to fire store
-  Future<void> uploadToFirestore(String url) async {
+  Future<void> uploadToFirestore(
+    String url,
+  ) async {
     try {
-      saleCar.add({
-        "carId": carId,
+      saleCarReference.doc(carId).set({
+        "postId": currentUser.uid.toString(),
         "image": url,
         "video": null,
         "brand": brandTextEditingController.text,
@@ -485,7 +467,7 @@ class _AddScreenState extends State<AddScreen> {
         "gear": gearTextEditingController.text,
         "not": notTextEditingController.text,
         "statusCar": dropdownValue.toString(),
-        "installment": null,
+        "installment": installment ? "yes" : null,
       });
       print("don upload data to cloud");
       setState(() {
@@ -512,7 +494,10 @@ class _AddScreenState extends State<AddScreen> {
     notTextEditingController.clear();
     phoneTextEditingController.clear();
     dropdownValue = 'select';
-    // Navigator.pop(context);
+    installment = false;
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return HomeScreen();
+    }));
     print("clear and pop");
   }
 }

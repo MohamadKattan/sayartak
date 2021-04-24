@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/splash_screen.dart';
 import 'package:sayartak/provider/addCar.dart';
-import 'package:sayartak/provider/current_user_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AddCar()),
-        ChangeNotifierProvider(create: (context) => CurrentUserProvider()),
       ],
       child: MaterialApp(
         title: "sayartak",
