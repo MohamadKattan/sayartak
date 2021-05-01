@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:sayartak/all_screens/favorite_screen.dart';
 import 'package:sayartak/all_screens/login_screen.dart';
 import 'package:sayartak/all_screens/my_car.dart';
 import 'package:sayartak/all_screens/profile_screen.dart';
@@ -66,8 +67,8 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               debugPrint("Tapped settings");
             },
-            leading: Icon(Icons.settings),
-            title: Text("Settings"),
+            leading: Icon(Icons.notifications_rounded),
+            title: Text("Nonfiction"),
           ),
           Divider(
             height: 1,
@@ -75,10 +76,10 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              debugPrint("Tapped Payments");
+              Navigator.push(context, MaterialPageRoute(builder:(context)=>FavoriteScreen()));
             },
-            leading: Icon(Icons.payment),
-            title: Text("Payments"),
+            leading: Icon(Icons.favorite),
+            title: Text("Favorite cars"),
           ),
           Divider(
             height: 1,

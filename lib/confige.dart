@@ -14,6 +14,7 @@ TextEditingController emailTextEditingController = TextEditingController();
 TextEditingController passWordTextEditingController = TextEditingController();
 ///here for add car
 CollectionReference saleCarReference = FirebaseFirestore.instance.collection('saleCar');
+CollectionReference favoriteCarReference = FirebaseFirestore.instance.collection('favorite');
 TextEditingController brandTextEditingController = TextEditingController();
 TextEditingController modelTextEditingController = TextEditingController();
 TextEditingController cityTextEditingController = TextEditingController();

@@ -1,23 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sayartak/all_screens/full_image.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/sale_car_model.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class MyCars extends StatelessWidget {
+class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        title: Text("My car"),
+        title: Text("Favorite"),
         centerTitle: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: saleCarReference
-            .where("postId", isEqualTo: "${currentUser.uid}")
+        stream: favoriteCarReference
+            .where("postLiked", isEqualTo: "${currentUser.uid}")
             .snapshots(),
         builder: (context, snapshots) {
           if (snapshots.hasError) {
@@ -60,16 +61,23 @@ class MyCars extends StatelessWidget {
   Widget carList(
     BuildContext context,
     SaleCar saleCar,
-    AsyncSnapshot<QuerySnapshot> snapshot,
-    int index,
+    snapshot,
+    int i,
   ) {
     return Column(
       children: [
         SizedBox(height: 16.0),
         Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.only(right: 4.0, left: 4.0),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FullImage(
+                              image: saleCar.image,
+                            )));
+              },
               child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 30 / 100,
@@ -137,9 +145,6 @@ class MyCars extends StatelessWidget {
                           Text("Km : ${saleCar.km}",
                               style: TextStyle(
                                   color: Colors.grey, fontSize: 16.0)),
-                          Text("Price :\$ ${saleCar.price}",
-                              style: TextStyle(
-                                  color: Colors.grey, fontSize: 16.0)),
                         ],
                       ),
                     ],
@@ -150,25 +155,30 @@ class MyCars extends StatelessWidget {
                 right: 0.0,
                 left: 0.0,
                 child: Padding(
-                    padding: EdgeInsets.only(right: 4.0, left: 4.0),
+                    padding:
+                        EdgeInsets.only(right: 8.0, left: 8.0, bottom: 8.0),
                     child: Container(
                       height: 40.0,
                       decoration: BoxDecoration(
                           color: Colors.black87,
                           borderRadius: BorderRadius.all(Radius.circular(6.0))),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.phone, color: Colors.green)),
+                          SizedBox(width: 14.0),
+                          IconButton(
                               onPressed: () {
-                                saleCarReference
-                                    .doc(snapshot.data.docs[index].id)
+                                favoriteCarReference
+                                    .doc(snapshot.data.docs[i].id)
                                     .delete();
                               },
                               icon: Icon(
                                 Icons.delete,
                                 color: Colors.white,
-                              )),
+                              ))
                         ],
                       ),
                     )))

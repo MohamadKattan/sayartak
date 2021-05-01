@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,46 +9,60 @@ import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class NewCarScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black87,
-          title: Text("New Car"),
-          centerTitle: false,
-          actions: [
-            IconButton(
-                onPressed: () => print("searchBUTTON"),
-                icon: Icon(Icons.search))
-          ],
-        ),
-        body: StreamBuilder<QuerySnapshot>(
-            stream: saleCarReference
-                .where("postId", isEqualTo: "${currentUser.uid}")
-                .snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasError) {
-                return Text('Something went wrong');
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return CustomCircular();
-              }
-
-               return new ListView(
-                children:
-                snapshot.data.docs.map((DocumentSnapshot document) {
-                  SaleCar saleCar = SaleCar.fromMap(document.data());
-                  // Provider.of<AddCar>(context,listen: false).updateAddCar(saleCar);
-                  return carList(context, saleCar);
-                }).toList(),
-              );
-            }));
+      appBar: AppBar(
+        backgroundColor: Colors.black87,
+        title: Text("New Car"),
+        centerTitle: false,
+        actions: [
+          IconButton(
+              onPressed: () => print("searchBUTTON"), icon: Icon(Icons.search))
+        ],
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: saleCarReference
+            .where("statusCar", isEqualTo: "newCar")
+            .snapshots(),
+        builder: (context, snapshots) {
+          if (snapshots.hasError) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.clear,
+                  size: 40,
+                  color: Colors.redAccent[700],
+                ),
+                Text('Something went wrong'),
+              ],
+            );
+          }
+          if (snapshots.connectionState == ConnectionState.waiting) {
+            return CustomCircular();
+          }
+          if (snapshots.connectionState == ConnectionState.active) {
+            return ListView.builder(
+              itemCount: snapshots.data.docs.length,
+              itemBuilder: (context, index) {
+                SaleCar saleCar =
+                    SaleCar.fromMap(snapshots.data.docs[index].data());
+                return carList(context, saleCar,snapshots,index);
+              },
+            );
+          }
+          if (snapshots == null) {
+            return Center(child: Text("No data yet!!"));
+          } else {
+            return Text("error");
+          }
+        },
+      ),
+    );
   }
 
-// for show list of car from stream =>fireStore
-  Widget carList(BuildContext context, SaleCar saleCar) {
+  Widget carList(BuildContext context, SaleCar saleCar, AsyncSnapshot<QuerySnapshot> snapshots, int i) {
     return Column(
       children: [
         SizedBox(height: 16.0),
@@ -56,10 +71,16 @@ class NewCarScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 4.0, left: 4.0),
               child: GestureDetector(
-                onTap:(){
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => CarDetails(saleCarDetails: saleCar)));
-              },
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CarDetails(
+                                saleCarDetails: saleCar,
+                                idLike:snapshots.data.docs[i].id ,
+                                // idLike: id,
+                              )));
+                },
                 child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 30 / 100,
@@ -116,7 +137,8 @@ class NewCarScreen extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.all(4.0),
                               child: Text(
-                                  "Model : ${saleCar.brand} ${saleCar.model}",textAlign:TextAlign.start,
+                                  "Model : ${saleCar.brand} ${saleCar.model}",
+                                  textAlign: TextAlign.start,
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 14.0)),
                             ),
@@ -143,30 +165,29 @@ class NewCarScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.black87,
                           borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.phone, color: Colors.green),
-                                SizedBox(width: 8.0),
-                                Icon(Icons.favorite, color: Colors.white)
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.phone, color: Colors.green)),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(right: 8.0),
+                                child: Text(
                                   "\$ ${saleCar.price}",
                                   style: TextStyle(
                                       fontSize: 16.0, color: Colors.white),
                                 ),
-                              ],
-                            ),
-
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     )))
           ],
@@ -174,5 +195,4 @@ class NewCarScreen extends StatelessWidget {
       ],
     );
   }
-
 }

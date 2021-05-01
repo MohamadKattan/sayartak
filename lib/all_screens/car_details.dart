@@ -1,13 +1,21 @@
-
 import 'package:flutter/material.dart';
 import 'package:sayartak/all_screens/full_image.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/sale_car_model.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class CarDetails extends StatelessWidget {
+class CarDetails extends StatefulWidget {
   final SaleCar saleCarDetails;
-  CarDetails({this.saleCarDetails});
+  final String idLike;
+  CarDetails({this.saleCarDetails, this.idLike});
+
+  @override
+  _CarDetailsState createState() => _CarDetailsState();
+}
+
+class _CarDetailsState extends State<CarDetails> {
+  bool isLiked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,9 +24,16 @@ class CarDetails extends StatelessWidget {
         title: Text("Car details"),
         centerTitle: false,
         actions: [
-          IconButton(icon: Icon(Icons.call), onPressed: () => print("call")),
-          IconButton(
-              icon: Icon(Icons.favorite), onPressed: () => print("favorite")),
+          !isLiked
+              ? IconButton(
+                  icon: Icon(Icons.favorite, color: Colors.white),
+                  onPressed: () {
+                    setState(() {
+                      isLiked=true;
+                      iLiked(context);
+                    });
+                  } )
+              : Icon(Icons.favorite, color: Colors.red),
         ],
       ),
       body: SingleChildScrollView(
@@ -32,7 +47,7 @@ class CarDetails extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => FullImage(
-                              image: saleCarDetails.image,
+                              image: widget.saleCarDetails.image,
                             )));
               },
               child: Container(
@@ -42,7 +57,7 @@ class CarDetails extends StatelessWidget {
                     tag: "someTag",
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      image: saleCarDetails.image,
+                      image: widget.saleCarDetails.image,
                       fit: BoxFit.fill,
                     )),
               ),
@@ -51,7 +66,7 @@ class CarDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${saleCarDetails.brand} ${saleCarDetails.model}",
+                  "${widget.saleCarDetails.brand} ${widget.saleCarDetails.model}",
                   style: TextStyle(fontSize: 18.0),
                 ),
               ],
@@ -59,11 +74,11 @@ class CarDetails extends StatelessWidget {
             Divider(),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(
-                "USD : ${saleCarDetails.price}",
+                "USD : ${widget.saleCarDetails.price}",
                 style: TextStyle(fontSize: 16.0),
               ),
               Text(
-                "${saleCarDetails.installment}",
+                "${widget.saleCarDetails.installment}",
                 style: TextStyle(fontSize: 16.0),
               ),
             ]),
@@ -71,7 +86,7 @@ class CarDetails extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Not :  ${saleCarDetails.not}",
+                Text("Not :  ${widget.saleCarDetails.not}",
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 16.0)),
@@ -82,7 +97,7 @@ class CarDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("City :", style: TextStyle(fontSize: 16.0)),
-                Text(" ${saleCarDetails.city}",
+                Text(" ${widget.saleCarDetails.city}",
                     style: TextStyle(fontSize: 16.0)),
               ],
             ),
@@ -91,7 +106,8 @@ class CarDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("k.m :", style: TextStyle(fontSize: 16.0)),
-                Text(" ${saleCarDetails.km}", style: TextStyle(fontSize: 16.0)),
+                Text(" ${widget.saleCarDetails.km}",
+                    style: TextStyle(fontSize: 16.0)),
               ],
             ),
             Divider(),
@@ -99,7 +115,7 @@ class CarDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Gear:", style: TextStyle(fontSize: 16.0)),
-                Text(" ${saleCarDetails.gear}",
+                Text(" ${widget.saleCarDetails.gear}",
                     style: TextStyle(fontSize: 16.0)),
               ],
             ),
@@ -108,7 +124,8 @@ class CarDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Gaz:", style: TextStyle(fontSize: 16.0)),
-                Text("${saleCarDetails.gaz}", style: TextStyle(fontSize: 16.0)),
+                Text("${widget.saleCarDetails.gaz}",
+                    style: TextStyle(fontSize: 16.0)),
               ],
             ),
             Divider(),
@@ -116,7 +133,7 @@ class CarDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Brand:", style: TextStyle(fontSize: 16.0)),
-                Text("${saleCarDetails.brand}",
+                Text("${widget.saleCarDetails.brand}",
                     style: TextStyle(fontSize: 16.0)),
               ],
             ),
@@ -125,7 +142,7 @@ class CarDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Model:", style: TextStyle(fontSize: 16.0)),
-                Text(" ${saleCarDetails.model}",
+                Text(" ${widget.saleCarDetails.model}",
                     style: TextStyle(fontSize: 16.0)),
               ],
             ),
@@ -134,7 +151,7 @@ class CarDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Price:", style: TextStyle(fontSize: 16.0)),
-                Text("\$ ${saleCarDetails.price}",
+                Text("\$ ${widget.saleCarDetails.price}",
                     style: TextStyle(fontSize: 16.0)),
               ],
             ),
@@ -143,7 +160,7 @@ class CarDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Status car:", style: TextStyle(fontSize: 16.0)),
-                Text(" ${saleCarDetails.statusCar}",
+                Text(" ${widget.saleCarDetails.statusCar}",
                     style: TextStyle(fontSize: 16.0)),
               ],
             ),
@@ -151,5 +168,24 @@ class CarDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> iLiked(
+    BuildContext context,
+  ) async {
+    try {
+      await favoriteCarReference.doc(widget.idLike).set({
+        "postLiked": currentUser.uid.toString(),
+        "image": widget.saleCarDetails.image,
+        "brand": widget.saleCarDetails.brand,
+        "model": widget.saleCarDetails.model,
+        "color": widget.saleCarDetails.color,
+        "price": widget.saleCarDetails.price,
+        "km": widget.saleCarDetails.km,
+        "phone": widget.saleCarDetails.phone,
+        "statusCar": widget.saleCarDetails.statusCar,
+        "installment": widget.saleCarDetails.installment,
+      });
+    } catch (ex) {}
   }
 }

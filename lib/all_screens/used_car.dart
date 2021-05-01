@@ -1,7 +1,9 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sayartak/all_screens/car_details.dart';
+import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/sale_car_model.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -9,42 +11,57 @@ import 'package:transparent_image/transparent_image.dart';
 class UsedCarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    CollectionReference car = FirebaseFirestore.instance.collection('saleCar');
-
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black87,
-          title: Text("Used Car"),
-          centerTitle: false,
-          actions: [
-            IconButton(
-                onPressed: () => print("searchBUTTON"),
-                icon: Icon(Icons.search))
-          ],
-        ),
-        body: StreamBuilder<QuerySnapshot>(
-            stream: car.where("statusCar", isNotEqualTo: "newCar").snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasError) {
-                return Text('Something went wrong');
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return CustomCircular();
-              }
-              if (!snapshot.hasData) {
-                Center(child: Text("No data yet"));
-              }
-              return new ListView(
-                children: snapshot.data.docs.map((DocumentSnapshot document) {
-                  SaleCar saleCar = SaleCar.fromMap(document.data());
-                  return carList(context, saleCar);
-                }).toList(),
-              );
-            }));
+      appBar: AppBar(
+        backgroundColor: Colors.black87,
+        title: Text("Used Car"),
+        centerTitle: false,
+        actions: [
+          IconButton(
+              onPressed: () => print("searchBUTTON"), icon: Icon(Icons.search))
+        ],
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: saleCarReference
+            .where("statusCar", isEqualTo: "usedCar")
+            .snapshots(),
+        builder: (context, snapshots) {
+          if (snapshots.hasError) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.clear,
+                  size: 40,
+                  color: Colors.redAccent[700],
+                ),
+                Text('Something went wrong'),
+              ],
+            );
+          }
+          if (snapshots.connectionState == ConnectionState.waiting) {
+            return CustomCircular();
+          }
+          if (snapshots.connectionState == ConnectionState.active) {
+            return ListView.builder(
+              itemCount: snapshots.data.docs.length,
+              itemBuilder: (context, index) {
+                SaleCar saleCar =
+                SaleCar.fromMap(snapshots.data.docs[index].data());
+                return carList(context, saleCar);
+              },
+            );
+          }
+          if (snapshots == null) {
+            return Center(child: Text("No data yet!!"));
+          } else {
+            return Text("error");
+          }
+        },
+      ),
+    );
   }
 
-// for show list of car from stream =>fireStore
   Widget carList(BuildContext context, SaleCar saleCar) {
     return Column(
       children: [
@@ -54,9 +71,14 @@ class UsedCarScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 4.0, left: 4.0),
               child: GestureDetector(
-                onTap:(){
+                onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => CarDetails(saleCarDetails: saleCar)));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CarDetails(
+                            saleCarDetails: saleCar,
+                            // idLike: id,
+                          )));
                 },
                 child: Container(
                     width: MediaQuery.of(context).size.width,
@@ -82,7 +104,7 @@ class UsedCarScreen extends StatelessWidget {
                               child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(8.0)),
+                                    BorderRadius.all(Radius.circular(8.0)),
                                   ),
                                   height: MediaQuery.of(context).size.height *
                                       15 /
@@ -95,7 +117,7 @@ class UsedCarScreen extends StatelessWidget {
                                       placeholder: kTransparentImage,
                                       image: saleCar.image)),
                             ),
-                            Text("${saleCar.statusCar}"),
+                            Text(saleCar.statusCar.toString()),
                             Row(
                               children: [
                                 Icon(Icons.directions_car),
@@ -115,8 +137,9 @@ class UsedCarScreen extends StatelessWidget {
                               padding: EdgeInsets.all(4.0),
                               child: Text(
                                   "Model : ${saleCar.brand} ${saleCar.model}",
+                                  textAlign: TextAlign.start,
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 18.0)),
+                                      color: Colors.black, fontSize: 14.0)),
                             ),
                             Text("City : ${saleCar.city}",
                                 style: TextStyle(
@@ -141,25 +164,29 @@ class UsedCarScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.black87,
                           borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.phone, color: Colors.green),
-                                SizedBox(width: 8.0),
-                                Icon(Icons.favorite, color: Colors.white)
-                              ],
-                            ),
-                            Text(
-                              "\$ ${saleCar.price}",
-                              style: TextStyle(
-                                  fontSize: 16.0, color: Colors.white),
-                            )
-                          ],
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.phone, color: Colors.green)),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(right: 8.0),
+                                child: Text(
+                                  "\$ ${saleCar.price}",
+                                  style: TextStyle(
+                                      fontSize: 16.0, color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     )))
           ],

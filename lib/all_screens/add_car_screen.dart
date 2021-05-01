@@ -442,9 +442,7 @@ class _AddScreenState extends State<AddScreen> {
 
   Future<void> downloadUrl(String url) async {
     print(url);
-    return await uploadToFirestore(
-      url,
-    );
+    return await uploadToFirestore(url);
   }
 
 // this method for upload to fire store
@@ -452,7 +450,7 @@ class _AddScreenState extends State<AddScreen> {
     String url,
   ) async {
     try {
-      saleCarReference.doc(carId).set({
+      saleCarReference.add({
         "postId": currentUser.uid.toString(),
         "image": url,
         "video": null,
@@ -467,7 +465,7 @@ class _AddScreenState extends State<AddScreen> {
         "gear": gearTextEditingController.text,
         "not": notTextEditingController.text,
         "statusCar": dropdownValue.toString(),
-        "installment": installment ? "yes" : null,
+        "installment": installment ? "Available" : "Not available",
       });
       print("don upload data to cloud");
       setState(() {

@@ -16,9 +16,9 @@ class SaleCar {
   String installment;
   String statusCar;
   String postId;
+  String likes;
   SaleCar(
-      {
-        this.postId,
+      {this.postId,
       this.brand,
       this.city,
       this.color,
@@ -32,23 +32,25 @@ class SaleCar {
       this.not,
       this.phone,
       this.price,
-      this.video});
-SaleCar.fromMap(Map<String, dynamic> mapData) {
-      postId=mapData['postId'];
-      video= mapData['video'];
-      image= mapData['image'];
-      brand= mapData['brand'];
-      model= mapData['model'];
-      city=mapData['city'];
-      gear= mapData['gear'];
-      gaz= mapData['gaz'];
-      km= mapData['km'];
-      phone= mapData['phone'];
-      not= mapData['not'];
-      installment= mapData['installment'];
-      statusCar= mapData['statusCar'];
-      color= mapData['color'];
-      price= mapData['price'];
-
+      this.video,
+        this.likes,
+      });
+  SaleCar.fromMap(Map<String, dynamic> mapData) {
+    postId = mapData['postId'];
+    video = mapData['video'];
+    image = mapData['image'];
+    brand = mapData['brand'];
+    model = mapData['model'];
+    city = mapData['city'];
+    gear = mapData['gear'];
+    gaz = mapData['gaz'];
+    km = mapData['km'];
+    phone = mapData['phone'];
+    not = mapData['not'];
+    installment = mapData['installment'];
+    statusCar = mapData['statusCar'];
+    color = mapData['color'];
+    price = mapData['price'];
+    likes = mapData['likes'];
   }
 }
