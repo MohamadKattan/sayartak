@@ -1,12 +1,14 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sayartak/all_screens/car_details.dart';
+import 'package:sayartak/all_screens/search_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/sale_car_model.dart';
+import 'package:sayartak/service/call_message_service.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UsedCarScreen extends StatelessWidget {
   @override
@@ -18,7 +20,9 @@ class UsedCarScreen extends StatelessWidget {
         centerTitle: false,
         actions: [
           IconButton(
-              onPressed: () => print("searchBUTTON"), icon: Icon(Icons.search))
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchScreen())),
+              icon: Icon(Icons.search))
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -47,7 +51,7 @@ class UsedCarScreen extends StatelessWidget {
               itemCount: snapshots.data.docs.length,
               itemBuilder: (context, index) {
                 SaleCar saleCar =
-                SaleCar.fromMap(snapshots.data.docs[index].data());
+                    SaleCar.fromMap(snapshots.data.docs[index].data());
                 return carList(context, saleCar);
               },
             );
@@ -76,9 +80,9 @@ class UsedCarScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => CarDetails(
-                            saleCarDetails: saleCar,
-                            // idLike: id,
-                          )));
+                                saleCarDetails: saleCar,
+                                // idLike: id,
+                              )));
                 },
                 child: Container(
                     width: MediaQuery.of(context).size.width,
@@ -104,7 +108,7 @@ class UsedCarScreen extends StatelessWidget {
                               child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)),
+                                        BorderRadius.all(Radius.circular(8.0)),
                                   ),
                                   height: MediaQuery.of(context).size.height *
                                       15 /
@@ -170,8 +174,14 @@ class UsedCarScreen extends StatelessWidget {
                           Row(
                             children: [
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () =>
+                                      CallService.launchCall(context, saleCar),
                                   icon: Icon(Icons.phone, color: Colors.green)),
+                              IconButton(
+                                  onPressed: () => CallService.launchMessage(
+                                      context, saleCar),
+                                  icon:
+                                      Icon(Icons.message, color: Colors.white)),
                             ],
                           ),
                           Row(

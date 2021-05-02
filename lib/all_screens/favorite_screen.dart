@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sayartak/all_screens/full_image.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/sale_car_model.dart';
+import 'package:sayartak/service/call_message_service.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -165,10 +166,16 @@ class FavoriteScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.phone, color: Colors.green)),
-                          SizedBox(width: 14.0),
+                          Row(children: [
+                            IconButton(
+                                onPressed: () =>
+                                    CallService.launchCall(context, saleCar),
+                                icon: Icon(Icons.phone, color: Colors.green)),
+                            IconButton(
+                                onPressed: () =>
+                                    CallService.launchMessage(context, saleCar),
+                                icon: Icon(Icons.message, color: Colors.white)),
+                          ]),
                           IconButton(
                               onPressed: () {
                                 favoriteCarReference
