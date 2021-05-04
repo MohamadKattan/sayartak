@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sayartak/all_screens/add_car_screen.dart';
+import 'package:sayartak/all_screens/galleries_screen.dart';
 import 'package:sayartak/all_screens/new_car_screen.dart';
 import 'package:sayartak/all_screens/used_car.dart';
 
@@ -174,35 +175,38 @@ class MainScreen extends StatelessWidget {
                               )
                             ]),
                       ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 20 / 100,
-                        width: MediaQuery.of(context).size.width * 30 / 100,
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(6.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 16.0,
-                                  spreadRadius: 0.6,
-                                  offset: Offset(0.7, 0.7))
-                            ],
-                            color: Colors.white),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("images/carsshop.png", height: 30),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                "Gallery's",
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w400),
-                              )
-                            ]),
+                      GestureDetector(
+                        onTap: () =>Navigator.push(context, MaterialPageRoute(builder:(context)=> GalleriesScreen())),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 20 / 100,
+                          width: MediaQuery.of(context).size.width * 30 / 100,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 16.0,
+                                    spreadRadius: 0.6,
+                                    offset: Offset(0.7, 0.7))
+                              ],
+                              color: Colors.white),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset("images/carsshop.png", height: 30),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Text(
+                                  "Gallery's",
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w400),
+                                )
+                              ]),
+                        ),
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height * 20 / 100,

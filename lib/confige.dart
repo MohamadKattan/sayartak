@@ -28,3 +28,13 @@ TextEditingController notTextEditingController = TextEditingController();
 final TextEditingController maxWidthController = TextEditingController();
 final TextEditingController maxHeightController = TextEditingController();
 final TextEditingController qualityController = TextEditingController();
+///here for add new gallery
+CollectionReference newGalleryReference = FirebaseFirestore.instance.collection('galleries');
+TextEditingController nameGalleryEditingController = TextEditingController();
+TextEditingController address1GalleryEditingController = TextEditingController();
+TextEditingController address2GalleryEditingController = TextEditingController();
+TextEditingController phoneGalleryEditingController = TextEditingController();
+TextEditingController locationGalleryEditingController = TextEditingController();
+TextEditingController numberIdGalleryEditingController = TextEditingController();
+///here for admin add car
+CollectionReference adminAddCarReference = FirebaseFirestore.instance.collection('adminAddCar');

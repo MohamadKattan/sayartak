@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sayartak/all_screens/Registr_screen.dart';
+import 'package:sayartak/all_screens/admin_panel.dart';
 import 'package:sayartak/all_screens/home_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/service/auth_service.dart';
@@ -24,7 +24,10 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
-        title: Text("Login"),
+        title: GestureDetector(
+            onLongPress: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AdminPanel())),
+            child: Text("Login")),
         centerTitle: false,
         elevation: 2.0,
       ),
