@@ -163,12 +163,12 @@ class MainScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("images/import.png", height: 30),
+                              Image.asset("images/notification-01.png", height: 50),
                               SizedBox(
                                 height: 2,
                               ),
                               Text(
-                                "importing cars",
+                                "Notification",
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w400),
@@ -195,7 +195,7 @@ class MainScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset("images/carsshop.png", height: 30),
+                                Image.asset("images/carsshop.png", height: 50),
                                 SizedBox(
                                   height: 2,
                                 ),
@@ -226,12 +226,12 @@ class MainScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset("images/pinkcoins.png", height: 30),
+                              Image.asset("images/owtruck.png", height: 50),
                               SizedBox(
                                 height: 2,
                               ),
                               Text(
-                                "Prices",
+                                "Towtruck",
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w400),
@@ -242,105 +242,6 @@ class MainScreen extends StatelessWidget {
               ),
               SizedBox(
                 height: 8.0,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 25 / 100,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 20 / 100,
-                        width: MediaQuery.of(context).size.width * 30 / 100,
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(6.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 16.0,
-                                  spreadRadius: 0.6,
-                                  offset: Offset(0.7, 0.7))
-                            ],
-                            color: Colors.white),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("images/carfix.png", height: 30),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                "risque",
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w400),
-                              )
-                            ]),
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 20 / 100,
-                        width: MediaQuery.of(context).size.width * 30 / 100,
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(6.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 16.0,
-                                  spreadRadius: 0.6,
-                                  offset: Offset(0.7, 0.7))
-                            ],
-                            color: Colors.white),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("images/notification-01.png",
-                                  height: 30),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                "notification",
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w400),
-                              )
-                            ]),
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 20 / 100,
-                        width: MediaQuery.of(context).size.width * 30 / 100,
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(6.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 16.0,
-                                  spreadRadius: 0.6,
-                                  offset: Offset(0.7, 0.7))
-                            ],
-                            color: Colors.white),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("images/owtruck.png", height: 30),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                "towTruck",
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w400),
-                              )
-                            ]),
-                      ),
-                    ]),
               ),
             ],
           ),

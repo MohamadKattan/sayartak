@@ -32,7 +32,7 @@ class CallService{
   }
 
   static launchLocationGallery(BuildContext context, Gallery gallery,) async {
-    final url = 'http://${gallery.location}';
+    final url = 'http://www.google.com/maps/place/${gallery.location}';
     if (await canLaunch(url)) {
       await launch(url);
     } else {

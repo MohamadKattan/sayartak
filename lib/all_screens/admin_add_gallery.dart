@@ -142,52 +142,56 @@ class _AddGalleryScreenState extends State<AddGalleryScreen> {
                     ),
                   ),
                 ),
-                Container(
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                    height: MediaQuery.of(context).size.height * 6 / 100,
-                    width: MediaQuery.of(context).size.height * 14 / 100,
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: customDropButton(
-                        value: dropdownValue,
-                        icon: Icon(
-                          Icons.arrow_downward,
-                          color: Colors.white,
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0,right: 16.0),
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                      height: MediaQuery.of(context).size.height * 6 / 100,
+                      width: MediaQuery.of(context).size.width * 6 / 100,
+
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: customDropButton(
+                          value: dropdownValue,
+                          icon: Icon(
+                            Icons.arrow_downward,
+                            color: Colors.white,
+                          ),
+                          iconSize: 16,
+                          elevation: 10,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              if (dropdownValue != null) {
+                                return dropdownValue = newValue;
+                              } else {
+                                return null;
+                              }
+                            });
+                            print("drop::" + dropdownValue);
+                          },
+                          items: <String>[
+                            'select',
+                            '1',
+                            '2',
+                            '3',
+                            '4',
+                            '5',
+                            '6',
+                            '7',
+                            '8',
+                            '9',
+                            '10',
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
                         ),
-                        iconSize: 16,
-                        elevation: 10,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            if (dropdownValue != null) {
-                              return dropdownValue = newValue;
-                            } else {
-                              return null;
-                            }
-                          });
-                          print("drop::" + dropdownValue);
-                        },
-                        items: <String>[
-                          'select',
-                          '1',
-                          '2',
-                          '3',
-                          '4',
-                          '5',
-                          '6',
-                          '7',
-                          '8',
-                          '9',
-                          '10',
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    )),
+                      )),
+                ),
                 SizedBox(height: 6.0),
                 Padding(
                   padding: EdgeInsets.all(8.0),
