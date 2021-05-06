@@ -3,6 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/galleries/galleryno1.dart';
+import 'package:sayartak/galleries/galleryno10.dart';
+import 'package:sayartak/galleries/galleryno2.dart';
+import 'package:sayartak/galleries/galleryno3.dart';
+import 'package:sayartak/galleries/galleryno4.dart';
+import 'package:sayartak/galleries/galleryno5.dart';
+import 'package:sayartak/galleries/galleryno6.dart';
+import 'package:sayartak/galleries/galleryno7.dart';
+import 'package:sayartak/galleries/galleryno8.dart';
+import 'package:sayartak/galleries/galleryno9.dart';
 import 'package:sayartak/model/new_gallery.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -10,7 +19,7 @@ class Galleries {
   gallery1() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "1").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "1").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -28,7 +37,7 @@ class Galleries {
   gallery2() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "2").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "2").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -46,7 +55,7 @@ class Galleries {
   gallery3() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "3").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "3").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -64,7 +73,7 @@ class Galleries {
   gallery4() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "4").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "4").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -82,7 +91,7 @@ class Galleries {
   gallery5() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "5").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "5").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -100,7 +109,7 @@ class Galleries {
   gallery6() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "6").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "6").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -118,7 +127,7 @@ class Galleries {
   gallery7() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "7").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "7").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -136,7 +145,7 @@ class Galleries {
   gallery8() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "8").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "8").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -154,7 +163,7 @@ class Galleries {
   gallery9() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "9").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "9").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -172,7 +181,7 @@ class Galleries {
   gallery10() {
     return StreamBuilder<QuerySnapshot>(
         stream:
-        newGalleryReference.where("galleryNo", isEqualTo: "10").snapshots(),
+            newGalleryReference.where("galleryNo", isEqualTo: "10").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("error");
@@ -191,18 +200,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () =>
-            Navigator.push(context, MaterialPageRoute(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
                 builder: (context) => GalleryNo1(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -228,10 +232,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -248,15 +249,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GalleryNo2(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -282,10 +281,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -302,15 +298,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GalleryNo3(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -336,10 +330,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -356,15 +347,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GalleryNo4(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -390,10 +379,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -410,15 +396,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GalleryNo5(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -444,10 +428,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -464,15 +445,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GalleryNo6(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -498,10 +477,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -518,15 +494,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GalleryNo7(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -552,10 +526,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -572,15 +543,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GalleryNo8(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -606,10 +575,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -626,15 +592,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GalleryNo9(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -660,10 +624,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -680,15 +641,13 @@ class Galleries {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GalleryNo10(stamp: gallery))),
         child: Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 20 / 100,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height * 20 / 100,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -714,10 +673,7 @@ class Galleries {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.black12,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   width: 2,
                 ),
               ),
@@ -729,5 +685,4 @@ class Galleries {
       ),
     );
   }
-
 }

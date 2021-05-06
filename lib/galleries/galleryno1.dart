@@ -4,6 +4,7 @@ import 'package:sayartak/all_screens/car_details.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/new_gallery.dart';
 import 'package:sayartak/model/sale_car_model.dart';
+import 'package:sayartak/service/call_message_service.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class GalleryNo1 extends StatelessWidget {
@@ -33,12 +34,12 @@ class GalleryNo1 extends StatelessWidget {
                         Row(
                           children: [
                             IconButton(
-                              onPressed: () => null,
+                              onPressed: () => CallService.launchCallGallery(context, stamp),
                               icon: Icon(Icons.call,
                                   color: Colors.green),
                             ),
                             IconButton(
-                              onPressed: () => null,
+                              onPressed: () => CallService.launchLocationGallery(context, stamp),
                               icon: Icon(Icons.add_location_alt,
                                   color: Colors.red),
                             ),

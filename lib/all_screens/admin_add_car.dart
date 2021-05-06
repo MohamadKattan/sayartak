@@ -8,7 +8,6 @@ import 'package:sayartak/all_screens/admin_panel.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_dialog.dart';
-import 'package:flutter/foundation.dart';
 import 'package:sayartak/widget/custom_drop_button.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
 import 'package:uuid/uuid.dart';
@@ -68,36 +67,36 @@ class _AdminAddCARState extends State<AdminAddCAR> {
                 ),
                 _imageFile != null
                     ? SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return Container(
-                          child: Image.file(
-                            File(_imageFile.path),
-                            fit: BoxFit.fill,
-                          ),
-                        );
-                      },
-                      itemCount: 1,
-                      scrollDirection: Axis.horizontal,
-                    ))
+                        height: 200,
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return Container(
+                              child: Image.file(
+                                File(_imageFile.path),
+                                fit: BoxFit.fill,
+                              ),
+                            );
+                          },
+                          itemCount: 1,
+                          scrollDirection: Axis.horizontal,
+                        ))
                     : Container(),
                 _videoFile != null
                     ? SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return Container(
-                          child: Icon(
-                            Icons.play_arrow,
-                            size: 35.0,
-                            color: Colors.black,
-                          ),
-                        );
-                      },
-                      itemCount: 1,
-                      scrollDirection: Axis.horizontal,
-                    ))
+                        height: 200,
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return Container(
+                              child: Icon(
+                                Icons.play_arrow,
+                                size: 35.0,
+                                color: Colors.black,
+                              ),
+                            );
+                          },
+                          itemCount: 1,
+                          scrollDirection: Axis.horizontal,
+                        ))
                     : Container(),
                 SizedBox(
                   height: 10,
@@ -245,13 +244,12 @@ class _AdminAddCARState extends State<AdminAddCAR> {
                           decoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius:
-                              BorderRadius.all(Radius.circular(6.0))),
+                                  BorderRadius.all(Radius.circular(6.0))),
                           height: MediaQuery.of(context).size.height * 6 / 100,
                           width: MediaQuery.of(context).size.height * 14 / 100,
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
-                            child:
-                            customDropButton(
+                            child: customDropButton(
                               value: dropdownValue,
                               icon: Icon(
                                 Icons.arrow_downward,
@@ -306,7 +304,7 @@ class _AdminAddCARState extends State<AdminAddCAR> {
                           decoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius:
-                              BorderRadius.all(Radius.circular(6.0))),
+                                  BorderRadius.all(Radius.circular(6.0))),
                           height: 80.0,
                           child: Center(
                               child: Text("Add a car",
@@ -397,9 +395,7 @@ class _AdminAddCARState extends State<AdminAddCAR> {
         show("km field car can\'t be empty");
       } else if (priceTextEditingController.text.isEmpty) {
         show("price field car can\'t be empty");
-      } else if (phoneTextEditingController.text.isEmpty) {
-        show("Phone field car can\'t be empty");
-      } else if (dropdownValue == "select") {
+      }  else if (dropdownValue == "select") {
         show("Choice number of gallery!!");
       } else {
         print("to Storage");
@@ -433,7 +429,7 @@ class _AdminAddCARState extends State<AdminAddCAR> {
           .child('car')
           .child(carId);
       firebase_storage.UploadTask uploadTask =
-      ref.putFile(File(_imageFile.path));
+          ref.putFile(File(_imageFile.path));
       String url = await uploadTask.then((url) {
         return ref.getDownloadURL();
       });
@@ -451,8 +447,8 @@ class _AdminAddCARState extends State<AdminAddCAR> {
 
 // this method for upload to fire store
   Future<void> uploadToFirestore(
-      String url,
-      ) async {
+    String url,
+  ) async {
     try {
       adminAddCarReference.add({
         "image": url,
@@ -463,7 +459,6 @@ class _AdminAddCARState extends State<AdminAddCAR> {
         "color": colorTextEditingController.text,
         "price": priceTextEditingController.text,
         "km": kmTextEditingController.text,
-        "phone": phoneTextEditingController.text,
         "gaz": gazTextEditingController.text,
         "gear": gearTextEditingController.text,
         "not": notTextEditingController.text,
@@ -493,7 +488,6 @@ class _AdminAddCARState extends State<AdminAddCAR> {
     kmTextEditingController.clear();
     priceTextEditingController.clear();
     notTextEditingController.clear();
-    phoneTextEditingController.clear();
     dropdownValue = 'select';
     installment = false;
     Navigator.push(context, MaterialPageRoute(builder: (context) {
