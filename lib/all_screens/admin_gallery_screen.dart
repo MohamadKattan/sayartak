@@ -14,7 +14,7 @@ class AdminGalleryScreen extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: newGalleryReference.orderBy("galleryNo",descending: true).snapshots(),
+        stream: newGalleryReference.snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text("error"));
@@ -76,28 +76,34 @@ class AdminGalleryScreen extends StatelessWidget {
                       width: 2,
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(gallery.name,
-                          style: TextStyle(fontSize: 20.0, color: Colors.black)),
-                      Text("No : ${gallery.galleryNo}" ,
-                          style: TextStyle(fontSize: 20.0, color: Colors.red)),
-                    ],
-                  )
+                  Text(gallery.name,
+                      style: TextStyle(fontSize: 20.0, color: Colors.black))
                 ],
               ),
-              IconButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AdminEditGallery(
-                                id: snapshot.data.docs[index].id,
-                              ))),
-                  icon: Icon(
-                    Icons.edit,
-                    color: Colors.black,
-                  )),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AdminEditGallery(
+                                    id: snapshot.data.docs[index].id,
+                                  ))),
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.black,
+                      )),
+                  IconButton(
+                      onPressed: () => newGalleryReference
+                          .doc(snapshot.data.docs[index].id)
+                          .delete(),
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.redAccent[700],
+                      )),
+                ],
+              ),
             ],
           ),
         ),

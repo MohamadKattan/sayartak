@@ -7,9 +7,9 @@ import 'package:sayartak/model/sale_car_model.dart';
 import 'package:sayartak/service/call_message_service.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class GalleryNo10 extends StatelessWidget {
+class CarsGalleryScreen extends StatelessWidget {
   final Gallery stamp;
-  GalleryNo10({this.stamp});
+  CarsGalleryScreen({this.stamp});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,16 +30,20 @@ class GalleryNo10 extends StatelessWidget {
                           radius: 30,
                           backgroundImage: NetworkImage(stamp.image)),
                       Column(children: [
-                        Text(stamp.name,style:TextStyle(color:Colors.white,fontSize: 18)),
+                        Text(stamp.name,
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 18)),
                         Row(
                           children: [
                             IconButton(
-                              onPressed: () => CallService.launchCallGallery(context, stamp),
-                              icon: Icon(Icons.call,
-                                  color: Colors.green),
+                              onPressed: () =>
+                                  CallService.launchCallGallery(context, stamp),
+                              icon: Icon(Icons.call, color: Colors.green),
                             ),
                             IconButton(
-                              onPressed: () => CallService.launchLocationGallery(context, stamp),
+                              onPressed: () =>
+                                  CallService.launchLocationGallery(
+                                      context, stamp),
                               icon: Icon(Icons.add_location_alt,
                                   color: Colors.red),
                             ),
@@ -49,8 +53,9 @@ class GalleryNo10 extends StatelessWidget {
                     ],
                   )))),
       body: StreamBuilder<QuerySnapshot>(
-        stream:
-        adminAddCarReference.where("statusCar", isEqualTo: "10").snapshots(),
+        stream: adminAddCarReference
+            .where("galleryname", isEqualTo: "${stamp.name}")
+            .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text("Error"));
@@ -61,7 +66,7 @@ class GalleryNo10 extends StatelessWidget {
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   var car = SaleCar.fromMap(snapshot.data.docs[index].data());
-                  return listOfcars(car, context, snapshot, index);
+                  return listOfCars(car, context, snapshot, index);
                 });
           } else {
             return Center(child: Text("No data yet..."));
@@ -71,7 +76,7 @@ class GalleryNo10 extends StatelessWidget {
     );
   }
 
-  Widget listOfcars(SaleCar car, BuildContext context,
+  Widget listOfCars(SaleCar car, BuildContext context,
       AsyncSnapshot<QuerySnapshot> snapshot, int index) {
     return Column(
       children: [
@@ -86,10 +91,10 @@ class GalleryNo10 extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => CarDetails(
-                            saleCarDetails: car,
-                            idLike: snapshot.data.docs[index].id,
-                            // idLike: id,
-                          )));
+                                saleCarDetails: car,
+                                idLike: snapshot.data.docs[index].id,
+                                // idLike: id,
+                              )));
                 },
                 child: Container(
                     width: MediaQuery.of(context).size.width,
@@ -115,7 +120,7 @@ class GalleryNo10 extends StatelessWidget {
                               child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)),
+                                        BorderRadius.all(Radius.circular(8.0)),
                                   ),
                                   height: MediaQuery.of(context).size.height *
                                       15 /

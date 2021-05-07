@@ -25,6 +25,7 @@ TextEditingController kmTextEditingController = TextEditingController();
 TextEditingController priceTextEditingController = TextEditingController();
 TextEditingController phoneTextEditingController = TextEditingController();
 TextEditingController notTextEditingController = TextEditingController();
+TextEditingController galleryNameEditingController = TextEditingController();
 final TextEditingController maxWidthController = TextEditingController();
 final TextEditingController maxHeightController = TextEditingController();
 final TextEditingController qualityController = TextEditingController();

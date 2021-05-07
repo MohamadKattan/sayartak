@@ -7,7 +7,6 @@ import 'package:sayartak/all_screens/admin_panel.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_dialog.dart';
-import 'package:sayartak/widget/custom_drop_button.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
 import 'package:uuid/uuid.dart';
 
@@ -25,7 +24,6 @@ class _AddGalleryScreenState extends State<AddGalleryScreen> {
   String galleryId = uuid.v1();
   bool isVideo = false;
   bool isLoading = false;
-  String dropdownValue = 'select';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +46,7 @@ class _AddGalleryScreenState extends State<AddGalleryScreen> {
           )
         ],
         backgroundColor: Colors.black,
-        title: Text("Add Gallery Screen"),
+        title: Text("Admin add gallery"),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -86,7 +84,7 @@ class _AddGalleryScreenState extends State<AddGalleryScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "Name Of gallery",
+                      labelText: "gallery name",
                       minLines: 1,
                       maxLines: 2,
                       controller: nameGalleryEditingController,
@@ -141,56 +139,6 @@ class _AddGalleryScreenState extends State<AddGalleryScreen> {
                       textInputType: TextInputType.phone,
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0,right: 16.0),
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                      height: MediaQuery.of(context).size.height * 6 / 100,
-                      width: MediaQuery.of(context).size.width * 6 / 100,
-
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: customDropButton(
-                          value: dropdownValue,
-                          icon: Icon(
-                            Icons.arrow_downward,
-                            color: Colors.white,
-                          ),
-                          iconSize: 16,
-                          elevation: 10,
-                          onChanged: (String newValue) {
-                            setState(() {
-                              if (dropdownValue != null) {
-                                return dropdownValue = newValue;
-                              } else {
-                                return null;
-                              }
-                            });
-                            print("drop::" + dropdownValue);
-                          },
-                          items: <String>[
-                            'select',
-                            '1',
-                            '2',
-                            '3',
-                            '4',
-                            '5',
-                            '6',
-                            '7',
-                            '8',
-                            '9',
-                            '10',
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      )),
                 ),
                 SizedBox(height: 6.0),
                 Padding(
@@ -276,8 +224,6 @@ class _AddGalleryScreenState extends State<AddGalleryScreen> {
         show("Secondary address can\'t be empty");
       } else if (phoneTextEditingController.text.isEmpty) {
         show("Phone field car can\'t be empty");
-      } else if (dropdownValue == "select") {
-        show("Choice number of gallery!!");
       } else {
         print("to Storage");
         upLoadToStorage();
@@ -322,7 +268,6 @@ class _AddGalleryScreenState extends State<AddGalleryScreen> {
         "name": nameGalleryEditingController.text,
         "address1": address1GalleryEditingController.text,
         "address2": address2GalleryEditingController.text,
-        "galleryNo": dropdownValue.toString(),
         "location": locationGalleryEditingController.text,
         "phone": phoneTextEditingController.text,
       });
@@ -339,7 +284,6 @@ class _AddGalleryScreenState extends State<AddGalleryScreen> {
 
   clearList() {
     _imageFile = null;
-    dropdownValue = "select";
     nameGalleryEditingController.clear();
     address1GalleryEditingController.clear();
     address2GalleryEditingController.clear();

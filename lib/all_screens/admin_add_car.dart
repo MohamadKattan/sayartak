@@ -8,7 +8,6 @@ import 'package:sayartak/all_screens/admin_panel.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_dialog.dart';
-import 'package:sayartak/widget/custom_drop_button.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
 import 'package:uuid/uuid.dart';
 
@@ -52,7 +51,7 @@ class _AdminAddCARState extends State<AdminAddCAR> {
             ],
           )
         ],
-        title: Text("Add a car"),
+        title: Text("Admin add a car"),
         centerTitle: false,
         backgroundColor: Colors.black,
       ),
@@ -203,12 +202,13 @@ class _AdminAddCARState extends State<AdminAddCAR> {
                 Padding(
                   padding: EdgeInsets.all(4.0),
                   child: Container(
+                    width: MediaQuery.of(context).size.width,
                     child: customTextField(
-                      labelText: "Phone ",
+                      labelText: "Nots",
                       minLines: 1,
                       maxLines: 2,
-                      controller: phoneTextEditingController,
-                      textInputType: TextInputType.phone,
+                      controller: notTextEditingController,
+                      textInputType: TextInputType.text,
                     ),
                   ),
                 ),
@@ -217,10 +217,10 @@ class _AdminAddCARState extends State<AdminAddCAR> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     child: customTextField(
-                      labelText: "Nots",
+                      labelText: "Gallery name",
                       minLines: 1,
                       maxLines: 2,
-                      controller: notTextEditingController,
+                      controller: galleryNameEditingController,
                       textInputType: TextInputType.text,
                     ),
                   ),
@@ -240,53 +240,7 @@ class _AdminAddCARState extends State<AdminAddCAR> {
                       SizedBox(
                         width: 100.0,
                       ),
-                      Container(
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6.0))),
-                          height: MediaQuery.of(context).size.height * 6 / 100,
-                          width: MediaQuery.of(context).size.height * 14 / 100,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: customDropButton(
-                              value: dropdownValue,
-                              icon: Icon(
-                                Icons.arrow_downward,
-                                color: Colors.white,
-                              ),
-                              iconSize: 16,
-                              elevation: 10,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  if (dropdownValue != null) {
-                                    return dropdownValue = newValue;
-                                  } else {
-                                    return null;
-                                  }
-                                });
-                                print("drop::" + dropdownValue);
-                              },
-                              items: <String>[
-                                'select',
-                                '1',
-                                '2',
-                                '3',
-                                '4',
-                                '5',
-                                '6',
-                                '7',
-                                '8',
-                                '9',
-                                '10',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ))
+                Text(""),
                     ],
                   ),
                 ),
@@ -395,8 +349,8 @@ class _AdminAddCARState extends State<AdminAddCAR> {
         show("km field car can\'t be empty");
       } else if (priceTextEditingController.text.isEmpty) {
         show("price field car can\'t be empty");
-      }  else if (dropdownValue == "select") {
-        show("Choice number of gallery!!");
+      } else if (galleryNameEditingController.text.isEmpty) {
+        show("Choice name of gallery!!");
       } else {
         print("to Storage");
         upLoadToStorage();
@@ -462,7 +416,7 @@ class _AdminAddCARState extends State<AdminAddCAR> {
         "gaz": gazTextEditingController.text,
         "gear": gearTextEditingController.text,
         "not": notTextEditingController.text,
-        "statusCar": dropdownValue.toString(),
+        "galleryname": galleryNameEditingController.text,
         "installment": installment ? "Available" : "Not available",
       });
       print("don upload data to cloud");
@@ -488,7 +442,7 @@ class _AdminAddCARState extends State<AdminAddCAR> {
     kmTextEditingController.clear();
     priceTextEditingController.clear();
     notTextEditingController.clear();
-    dropdownValue = 'select';
+    galleryNameEditingController.clear();
     installment = false;
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return AdminPanel();
