@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/splash_screen.dart';
 import 'package:sayartak/provider/addCar.dart';
+import 'package:sayartak/service/locale_notficition.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AddCar()),
+        ChangeNotifierProvider(create: (context) => LocaleNotifications()),
       ],
       child: MaterialApp(
         title: "sayartak",

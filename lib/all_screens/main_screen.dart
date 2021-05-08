@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/add_car_screen.dart';
 import 'package:sayartak/all_screens/galleries_screen.dart';
 import 'package:sayartak/all_screens/new_car_screen.dart';
 import 'package:sayartak/all_screens/used_car.dart';
+import 'package:sayartak/service/locale_notficition.dart';
 
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // var nott=  Provider.of<LocaleNotifications>(context,listen: false).firstNotifications();
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -208,35 +211,39 @@ class MainScreen extends StatelessWidget {
                               ]),
                         ),
                       ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 20 / 100,
-                        width: MediaQuery.of(context).size.width * 30 / 100,
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(6.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 16.0,
-                                  spreadRadius: 0.6,
-                                  offset: Offset(0.7, 0.7))
-                            ],
-                            color: Colors.white),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("images/owtruck.png", height: 50),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                "Towtruck",
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w400),
-                              )
-                            ]),
+                      GestureDetector(
+                        onTap: ()=>null,
+
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 20 / 100,
+                          width: MediaQuery.of(context).size.width * 30 / 100,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 16.0,
+                                    spreadRadius: 0.6,
+                                    offset: Offset(0.7, 0.7))
+                              ],
+                              color: Colors.white),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset("images/owtruck.png", height: 50),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Text(
+                                  "Towtruck",
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w400),
+                                )
+                              ]),
+                        ),
                       ),
                     ]),
               ),

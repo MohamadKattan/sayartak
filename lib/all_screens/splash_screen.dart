@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/home_screen.dart';
 import 'package:sayartak/all_screens/login_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/service/auth_service.dart';
-
+import 'package:sayartak/service/locale_notficition.dart';
 
 class SplashScreen extends StatefulWidget {
-
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -16,6 +16,9 @@ class _SplashScreenState extends State<SplashScreen>
   AnimationController _animationController;
   @override
   void initState() {
+    AuthService.getCurrentUser(context);
+    Provider.of<LocaleNotifications>(context, listen: false).initialization();
+    Provider.of<LocaleNotifications>(context, listen: false).weeklyNotifications();
     _animationController = AnimationController(
         vsync: this,
         duration: const Duration(seconds: 4),
@@ -32,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen>
         );
       }
     });
-    AuthService.getCurrentUser(context);
+
     super.initState();
   }
 
