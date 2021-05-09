@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/add_car_screen.dart';
 import 'package:sayartak/all_screens/galleries_screen.dart';
 import 'package:sayartak/all_screens/new_car_screen.dart';
+import 'package:sayartak/all_screens/notifications_screen.dart';
 import 'package:sayartak/all_screens/used_car.dart';
 import 'package:sayartak/service/locale_notficition.dart';
 
@@ -148,35 +149,38 @@ class MainScreen extends StatelessWidget {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 20 / 100,
-                        width: MediaQuery.of(context).size.width * 30 / 100,
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(6.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 16.0,
-                                  spreadRadius: 0.6,
-                                  offset: Offset(0.7, 0.7))
-                            ],
-                            color: Colors.white),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("images/notification-01.png", height: 50),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                "Notification",
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w400),
-                              )
-                            ]),
+                      GestureDetector(
+                        onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationScreen())),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 20 / 100,
+                          width: MediaQuery.of(context).size.width * 30 / 100,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 16.0,
+                                    spreadRadius: 0.6,
+                                    offset: Offset(0.7, 0.7))
+                              ],
+                              color: Colors.white),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset("images/notification-01.png", height: 50),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Text(
+                                  "Notification",
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w400),
+                                )
+                              ]),
+                        ),
                       ),
                       GestureDetector(
                         onTap: () =>Navigator.push(context, MaterialPageRoute(builder:(context)=> GalleriesScreen())),

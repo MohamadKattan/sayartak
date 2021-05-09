@@ -39,3 +39,5 @@ TextEditingController locationGalleryEditingController = TextEditingController()
 TextEditingController numberIdGalleryEditingController = TextEditingController();
 ///here for admin add car
 CollectionReference adminAddCarReference = FirebaseFirestore.instance.collection('adminAddCar');
+///here for admin set notification to fireStore
+CollectionReference adminNotificationReference = FirebaseFirestore.instance.collection('notification');

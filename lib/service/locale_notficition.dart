@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:sayartak/all_screens/notifications_screen.dart';
 
 class LocaleNotifications extends ChangeNotifier {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
   Future<void> initialization() async {
     const AndroidInitializationSettings android =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -19,38 +21,68 @@ class LocaleNotifications extends ChangeNotifier {
       iOS: ios,
     );
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: doSelectNotification);
+        onSelectNotification: selectNotification);
     notifyListeners();
   }
 
-  Future<void> doSelectNotification(String payload) async {}
+  Future<void> selectNotification(String payload) async {}
 
-  Future<void> firstNotifications() async {
+  Future<void> firstNotifications(
+      TextEditingController body, TextEditingController title) async {
     var android = AndroidNotificationDetails(
         "channelId", "channelName", "channelDescription",
-        priority: Priority.high, playSound: true);
+        importance: Importance.max,
+        priority: Priority.high,
+        playSound: true,
+        showWhen: false);
     var ios = IOSNotificationDetails();
     var platform = new NotificationDetails(android: android, iOS: ios);
-    await flutterLocalNotificationsPlugin.show(0, "Welcome with sayartak",
-        "with us will find Waht do you need", platform,
-        payload: "enjoy");
+    await flutterLocalNotificationsPlugin
+        .show(0, title.text, body.text, platform, payload: "enjoy");
     notifyListeners();
   }
 
   Future<void> weeklyNotifications() async {
     var android = AndroidNotificationDetails(
         "channelId", "channelName", "channelDescription",
-        priority: Priority.high, playSound: true);
+        importance: Importance.max,
+        priority: Priority.high,
+        playSound: true,
+        showWhen: false);
     var ios = IOSNotificationDetails();
     var platform = new NotificationDetails(android: android, iOS: ios);
     await flutterLocalNotificationsPlugin.showWeeklyAtDayAndTime(
-        0,
-        "Welcome with sayartak",
-        "with us will find Waht do you need",
-        Day(1),
-        Time(16, 10, 05),
-        platform,
-        payload: "enjoy");
+      0,
+      "Welcome with sayartak",
+      "with us will find Waht do you need",
+      Day(1),
+      Time(20, 30, 03),
+      platform,
+    );
     notifyListeners();
+  }
+
+  Future<void> timelyNotifications() async {
+    var interval = RepeatInterval.daily;
+    var android = AndroidNotificationDetails(
+        "channelId", "channelName", "channelDescription",
+        importance: Importance.max,
+        priority: Priority.high,
+        playSound: true,
+        showWhen: false);
+    var ios = IOSNotificationDetails();
+    var platform = new NotificationDetails(android: android, iOS: ios);
+    await flutterLocalNotificationsPlugin.periodicallyShow(
+        0,
+        "Welcome to sayartak",
+        "with us will find  your car ",
+        interval,
+        platform,
+        androidAllowWhileIdle: true);
+    notifyListeners();
+  }
+
+  Future<void> cancelNotifications() async {
+    flutterLocalNotificationsPlugin.cancelAll();
   }
 }

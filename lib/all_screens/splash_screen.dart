@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     AuthService.getCurrentUser(context);
     Provider.of<LocaleNotifications>(context, listen: false).initialization();
-    Provider.of<LocaleNotifications>(context, listen: false).weeklyNotifications();
+    Provider.of<LocaleNotifications>(context, listen: false).timelyNotifications();
     _animationController = AnimationController(
         vsync: this,
         duration: const Duration(seconds: 4),

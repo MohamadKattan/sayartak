@@ -3,8 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/admin_add_car.dart';
 import 'package:sayartak/all_screens/admin_add_gallery.dart';
 import 'package:sayartak/all_screens/admin_gallery_screen.dart';
+import 'package:sayartak/all_screens/admin_noti_control.dart';
 import 'package:sayartak/all_screens/login_screen.dart';
 import 'package:sayartak/service/locale_notficition.dart';
+
+import 'admin_type_notifications.dart';
 
 class AdminPanel extends StatelessWidget {
   @override
@@ -25,9 +28,9 @@ class AdminPanel extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
         children: [
+          SizedBox(height:30.0),
           Center(
             child: TextButton(
               onPressed: () => Navigator.push(context,
@@ -79,19 +82,34 @@ class AdminPanel extends StatelessWidget {
             ),
           ),
           Center(
-            child: Consumer<LocaleNotifications>(
-              builder: (context, model, _) => TextButton(
-                onPressed: () => model.firstNotifications(),
-                child: Container(
-                  color: Colors.black,
-                  width: MediaQuery.of(context).size.width * 80 / 100,
-                  height: MediaQuery.of(context).size.height * 10 / 100,
-                  child: Center(
-                      child: Text(
-                    "firstNotifications",
-                    style: TextStyle(color: Colors.white),
-                  )),
-                ),
+            child: TextButton(
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AdminTypeNotification())),
+              child: Container(
+                color: Colors.black,
+                width: MediaQuery.of(context).size.width * 80 / 100,
+                height: MediaQuery.of(context).size.height * 10 / 100,
+                child: Center(
+                    child: Text(
+                      "send a general notification",
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
+            ),
+          ),
+          Center(
+            child: TextButton(
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AdminNotControl())),
+              child: Container(
+                color: Colors.black,
+                width: MediaQuery.of(context).size.width * 80 / 100,
+                height: MediaQuery.of(context).size.height * 10 / 100,
+                child: Center(
+                    child: Text(
+                      "Delete notification",
+                      style: TextStyle(color: Colors.white),
+                    )),
               ),
             ),
           ),
