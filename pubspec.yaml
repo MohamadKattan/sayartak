@@ -70,6 +70,10 @@ flutter:
     - images/carfix.png
     - images/notification-01.png
     - images/owtruck.png
+    - images/fix1.png
+    - images/Untitled1.png
+    - images/Untitled2.png
+    - images/Untitled3.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
