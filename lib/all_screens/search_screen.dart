@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sayartak/all_screens/car_details.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/sale_car_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -49,7 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight + 20),
         child: Padding(
-          padding: EdgeInsets.only(left: 20),
+          padding: EdgeInsets.only(left:8.0,right: 8.0),
           child: TextField(
             controller: searchEditingController,
             onChanged: (val) {
@@ -73,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 },
               ),
               border: InputBorder.none,
-              hintText: "Search",
+              hintText:AppLocalizations.of(context).search,
               hintStyle: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 35,

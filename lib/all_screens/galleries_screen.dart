@@ -4,13 +4,14 @@ import 'package:sayartak/all_screens/cars_gallery_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/new_gallery.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GalleriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(" galleries"),
+        title: Text(AppLocalizations.of(context).gallery),
         backgroundColor: Colors.black,
       ),
       body: StreamBuilder<QuerySnapshot>(

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sayartak/all_screens/Registr_screen.dart';
 import 'package:sayartak/all_screens/admin_panel.dart';
-import 'package:sayartak/all_screens/home_screen.dart';
+import 'package:sayartak/all_screens/main_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/service/auth_service.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: GestureDetector(
             onLongPress: () => Navigator.push(
                 context, MaterialPageRoute(builder: (context) => AdminPanel())),
-            child: Text("Login")),
+            child: Text(AppLocalizations.of(context).login)),
         centerTitle: false,
         elevation: 2.0,
       ),
@@ -52,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Container(
                       child: customTextField(
                         obscureText: false,
-                        labelText: "email",
+                        labelText: AppLocalizations.of(context).email,
                         minLines: 1,
                         maxLines: 1,
                         controller: emailTextEditingController,
@@ -65,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Container(
                       child: customTextField(
                         obscureText: true,
-                        labelText: "PassWord",
+                        labelText: AppLocalizations.of(context).password,
                         minLines: 1,
                         maxLines: 1,
                         controller: passWordTextEditingController,
@@ -90,14 +91,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                     BorderRadius.all(Radius.circular(6.0))),
                             height: 60.0,
                             child: Center(
-                                child: Text("Login",
+                                child: Text(AppLocalizations.of(context).login,
                                     style: TextStyle(color: Colors.white))))),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already don\'t have an account : ",
+                        AppLocalizations.of(context).noaccount,
                         style: TextStyle(color: Colors.black, fontSize: 16.0),
                       ),
                       GestureDetector(
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                   builder: (context) => RegisterScreen()));
                         },
-                        child: Text("Register",
+                        child: Text(AppLocalizations.of(context).register,
                             style: TextStyle(
                                 color: Colors.redAccent[700],
                                 fontSize: 24.0,
@@ -118,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Divider(
                     color: Colors.grey,
                   ),
-                  Center(child: Text("or")),
+                  Center(child: Text(AppLocalizations.of(context).or)),
                   Padding(
                     padding: EdgeInsets.all(4.0),
                     child: GestureDetector(
@@ -136,7 +137,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     BorderRadius.all(Radius.circular(6.0))),
                             height: 60.0,
                             child: Center(
-                                child: Text("Login by google account",
+                                child: Text(
+                                    AppLocalizations.of(context).googlelogin,
                                     style: TextStyle(color: Colors.white))))),
                   ),
                   Padding(
@@ -157,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   BorderRadius.all(Radius.circular(6.0))),
                           height: 60.0,
                           child: Center(
-                              child: Text("Login by face bock",
+                              child: Text(AppLocalizations.of(context).facebook,
                                   style: TextStyle(color: Colors.white)))),
                     ),
                   )
@@ -172,10 +174,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> checkInfoInput(BuildContext context) async {
     if (emailTextEditingController.text.isEmpty) {
-      show("Email can\'t be empty");
+      show(AppLocalizations.of(context).show1);
     }
     if (passWordTextEditingController.text.isEmpty) {
-      show("PassWord can\'t be empty");
+      show(AppLocalizations.of(context).show2);
     } else {
       setState(() {
         isLoading = true;

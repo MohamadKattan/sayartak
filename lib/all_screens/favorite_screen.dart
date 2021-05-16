@@ -7,6 +7,7 @@ import 'package:sayartak/model/sale_car_model.dart';
 import 'package:sayartak/service/call_message_service.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteScreen extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class FavoriteScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        title: Text("Favorite"),
+        title: Text(AppLocalizations.of(context).favoritecar),
         centerTitle: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -135,15 +136,17 @@ class FavoriteScreen extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(4.0),
                             child: Text(
-                                "Model : ${saleCar.brand} ${saleCar.model}",
+                                "${AppLocalizations.of(context).brand} : ${saleCar.brand} ${saleCar.model}",
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 14.0)),
                           ),
-                          Text("City : ${saleCar.city}",
+                          Text(
+                              "${AppLocalizations.of(context).city}  : ${saleCar.city}",
                               style: TextStyle(
                                   color: Colors.grey, fontSize: 16.0)),
-                          Text("Km : ${saleCar.km}",
+                          Text(
+                              "${AppLocalizations.of(context).km}  : ${saleCar.km}",
                               style: TextStyle(
                                   color: Colors.grey, fontSize: 16.0)),
                         ],

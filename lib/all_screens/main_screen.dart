@@ -1,19 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/add_car_screen.dart';
 import 'package:sayartak/all_screens/galleries_screen.dart';
 import 'package:sayartak/all_screens/new_car_screen.dart';
 import 'package:sayartak/all_screens/notifications_screen.dart';
+import 'package:sayartak/all_screens/towtruck_screen.dart';
 import 'package:sayartak/all_screens/used_car.dart';
-import 'package:sayartak/service/locale_notficition.dart';
-
-class MainScreen extends StatelessWidget {
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sayartak/widget/customDrawer.dart';
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // var nott=  Provider.of<LocaleNotifications>(context,listen: false).firstNotifications();
     return SafeArea(
+
       child: Scaffold(
+        drawer: CustomDrawer(),
+        appBar:AppBar(
+          title: Text(AppLocalizations.of(context).title),
+          centerTitle: false,
+          backgroundColor: Colors.black,
+        ),
         body: Padding(
           padding: EdgeInsets.all(6.0),
           child: ListView(
@@ -49,12 +55,12 @@ class MainScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset("images/add.png", height: 50),
+                                Image.asset("images/add.png", height: 45),
                                 SizedBox(
                                   height: 2,
                                 ),
                                 Text(
-                                  "Sale a car",
+                                  AppLocalizations.of(context).salecar,
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.w400),
@@ -87,14 +93,14 @@ class MainScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset("images/newcar.png", height: 50),
+                                Image.asset("images/newcar.png", height: 45),
                                 SizedBox(
                                   height: 2,
                                 ),
                                 Text(
-                                  "New car",
+                                  AppLocalizations.of(context).newcar,
                                   style: TextStyle(
-                                      fontSize: 16.0,
+                                      fontSize: 14.0,
                                       fontWeight: FontWeight.w400),
                                 )
                               ]),
@@ -125,15 +131,17 @@ class MainScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset("images/usedcar.png", height: 50),
+                                Image.asset("images/usedcar.png", height: 40),
                                 SizedBox(
                                   height: 2,
                                 ),
-                                Text(
-                                  "Used car",
-                                  style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w400),
+                                Center(
+                                  child: Text(
+                                    AppLocalizations.of(context).usedcar,
+                                    style: TextStyle(
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w400),
+                                  ),
                                 )
                               ]),
                         ),
@@ -174,7 +182,7 @@ class MainScreen extends StatelessWidget {
                                   height: 2,
                                 ),
                                 Text(
-                                  "Notification",
+                                  AppLocalizations.of(context).notification,
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.w400),
@@ -207,7 +215,7 @@ class MainScreen extends StatelessWidget {
                                   height: 2,
                                 ),
                                 Text(
-                                  "Gallery's",
+                                  AppLocalizations.of(context).gallery,
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.w400),
@@ -216,7 +224,7 @@ class MainScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: ()=>null,
+                        onTap: ()=>Navigator.push(context, MaterialPageRoute(builder:(context)=> TowTruckScreen())),
 
                         child: Container(
                           height: MediaQuery.of(context).size.height * 20 / 100,
@@ -241,7 +249,7 @@ class MainScreen extends StatelessWidget {
                                   height: 2,
                                 ),
                                 Text(
-                                  "Towtruck",
+                                  AppLocalizations.of(context).towtruck,
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.w400),

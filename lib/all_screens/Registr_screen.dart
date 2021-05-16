@@ -8,6 +8,7 @@ import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
 import 'package:sayartak/confige.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 var uuid = Uuid();
 
 class RegisterScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
-        title: Text("Registration"),
+        title: Text(AppLocalizations.of(context).register),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -70,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Container(
                       child: customTextField(
                         obscureText: false,
-                        labelText: "name",
+                        labelText: AppLocalizations.of(context).name,
                         minLines: 1,
                         maxLines: 1,
                         controller: nameTextEditingController,
@@ -86,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Container(
                       child: customTextField(
                         obscureText: false,
-                        labelText: "email",
+                        labelText: AppLocalizations.of(context).email,
                         minLines: 1,
                         maxLines: 1,
                         controller: emailTextEditingController,
@@ -102,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Container(
                       child: customTextField(
                         obscureText: true,
-                        labelText: "PassWord",
+                        labelText: AppLocalizations.of(context).password,
                         minLines: 1,
                         maxLines: 1,
                         controller: passWordTextEditingController,
@@ -133,7 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     BorderRadius.all(Radius.circular(6.0))),
                             height: 60.0,
                             child: Center(
-                                child: Text("Register",
+                                child: Text(AppLocalizations.of(context).register,
                                     style: TextStyle(color: Colors.white))))),
                   ),
                   SizedBox(
@@ -143,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already have an account : ",
+                        AppLocalizations.of(context).haveaccount,
                         style: TextStyle(color: Colors.black, fontSize: 16.0),
                       ),
                       GestureDetector(
@@ -153,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               MaterialPageRoute(
                                   builder: (context) => LoginScreen()));
                         },
-                        child: Text("Login",
+                        child: Text(AppLocalizations.of(context).login,
                             style: TextStyle(
                                 color: Colors.redAccent[700],
                                 fontSize: 24.0,
@@ -200,17 +201,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void>  checkInfoInput(BuildContext context) async{
     if (photoFile == null) {
-      show("Photo can\'t be empty");
+      show(AppLocalizations.of(context).showimage);
     }
     if (nameTextEditingController == null) {
-      show("Name can\'t be empty");
+      show(AppLocalizations.of(context).showname);
     }
 
     if (emailTextEditingController == null) {
-      show("Email can\'t be empty");
+      show(AppLocalizations.of(context).show1,);
     }
     if (passWordTextEditingController == null) {
-      show("Email can\'t be empty");
+      show(AppLocalizations.of(context).show2);
     }else{
 
       _authService.setPhotoUserTOStorage(photoFile,userPhotoId,context);

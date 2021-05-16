@@ -3,6 +3,7 @@ import 'package:sayartak/all_screens/full_image.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/sale_car_model.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarDetails extends StatefulWidget {
   final SaleCar saleCarDetails;
@@ -21,7 +22,7 @@ class _CarDetailsState extends State<CarDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        title: Text("Car details"),
+        title: Text(AppLocalizations.of(context).cardetails),
         centerTitle: false,
         actions: [
           !isLiked
@@ -66,7 +67,7 @@ class _CarDetailsState extends State<CarDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${widget.saleCarDetails.brand} ${widget.saleCarDetails.model}",
+                  "${AppLocalizations.of(context).brand}:${widget.saleCarDetails.brand} ${widget.saleCarDetails.model}",
                   style: TextStyle(fontSize: 18.0),
                 ),
               ],
@@ -74,11 +75,11 @@ class _CarDetailsState extends State<CarDetails> {
             Divider(),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(
-                "USD : ${widget.saleCarDetails.price}",
+                "${AppLocalizations.of(context).price} : ${widget.saleCarDetails.price}",
                 style: TextStyle(fontSize: 16.0),
               ),
               Text(
-                "${widget.saleCarDetails.installment}",
+                "${AppLocalizations.of(context).installment} : ${widget.saleCarDetails.installment}",
                 style: TextStyle(fontSize: 16.0),
               ),
             ]),
@@ -86,7 +87,7 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Not :  ${widget.saleCarDetails.not}",
+                Text("${AppLocalizations.of(context).not} :  ${widget.saleCarDetails.not}",
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 16.0)),
@@ -96,7 +97,7 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("City :", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).city} :", style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.city}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -105,7 +106,7 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("k.m :", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).km}:", style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.km}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -114,7 +115,7 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Gear:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).gear}:", style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.gear}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -123,7 +124,7 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Gaz:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).gaz}:", style: TextStyle(fontSize: 16.0)),
                 Text("${widget.saleCarDetails.gaz}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -132,7 +133,7 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Brand:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).brand}:", style: TextStyle(fontSize: 16.0)),
                 Text("${widget.saleCarDetails.brand}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -141,7 +142,7 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Model:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).model}:", style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.model}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -150,7 +151,7 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Price:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).price}:", style: TextStyle(fontSize: 16.0)),
                 Text("\$ ${widget.saleCarDetails.price}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -159,7 +160,7 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Status car:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).statuscar}:", style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.statusCar}",
                     style: TextStyle(fontSize: 16.0)),
               ],

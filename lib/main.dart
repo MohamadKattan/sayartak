@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/splash_screen.dart';
 import 'package:sayartak/provider/addCar.dart';
 import 'package:sayartak/service/locale_notficition.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: "sayartak",
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       ),

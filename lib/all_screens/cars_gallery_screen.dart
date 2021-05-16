@@ -6,6 +6,7 @@ import 'package:sayartak/model/new_gallery.dart';
 import 'package:sayartak/model/sale_car_model.dart';
 import 'package:sayartak/service/call_message_service.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarsGalleryScreen extends StatelessWidget {
   final Gallery stamp;
@@ -151,15 +152,18 @@ class CarsGalleryScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding: EdgeInsets.all(4.0),
-                              child: Text("Model : ${car.brand} ${car.model}",
+                              child: Text(
+                                  "${AppLocalizations.of(context).model} : ${car.brand} ${car.model}",
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 14.0)),
                             ),
-                            Text("City : ${car.gaz}",
+                            Text(
+                                "${AppLocalizations.of(context).city} : ${car.gaz}",
                                 style: TextStyle(
                                     color: Colors.grey, fontSize: 16.0)),
-                            Text("Km : ${car.km}",
+                            Text(
+                                "${AppLocalizations.of(context).km} : ${car.km}",
                                 style: TextStyle(
                                     color: Colors.grey, fontSize: 16.0)),
                           ],
@@ -187,7 +191,7 @@ class CarsGalleryScreen extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.only(right: 8.0),
                                 child: Text(
-                                  "\$ ${car.price}",
+                                  "${AppLocalizations.of(context).price} : \$ ${car.price}",
                                   style: TextStyle(
                                       fontSize: 16.0, color: Colors.white),
                                 ),

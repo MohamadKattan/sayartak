@@ -5,13 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sayartak/all_screens/home_screen.dart';
+import 'package:sayartak/all_screens/main_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_dialog.dart';
 import 'package:sayartak/widget/custom_drop_button.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 var uuid = Uuid();
 
@@ -41,7 +42,7 @@ class _AddScreenState extends State<AddScreen> {
         actions: [
           Row(
             children: [
-              Text("Image"),
+              Text(AppLocalizations.of(context).image),
               IconButton(
                   tooltip: "image",
                   icon: Icon(
@@ -55,7 +56,7 @@ class _AddScreenState extends State<AddScreen> {
             ],
           )
         ],
-        title: Text("Add a car"),
+        title: Text(AppLocalizations.of(context).addcar),
         centerTitle: false,
         backgroundColor: Colors.black,
       ),
@@ -111,7 +112,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "Brand",
+                      labelText: AppLocalizations.of(context).brand,
                       minLines: 1,
                       maxLines: 2,
                       controller: brandTextEditingController,
@@ -123,7 +124,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "Model",
+                      labelText: AppLocalizations.of(context).model,
                       minLines: 1,
                       maxLines: 2,
                       controller: modelTextEditingController,
@@ -135,7 +136,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "city",
+                      labelText: AppLocalizations.of(context).city,
                       minLines: 1,
                       maxLines: 2,
                       controller: cityTextEditingController,
@@ -147,7 +148,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "gear",
+                      labelText: AppLocalizations.of(context).gear,
                       minLines: 1,
                       maxLines: 2,
                       controller: gearTextEditingController,
@@ -159,7 +160,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "Color",
+                      labelText: AppLocalizations.of(context).color,
                       minLines: 1,
                       maxLines: 2,
                       controller: colorTextEditingController,
@@ -171,7 +172,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "gaz or else",
+                      labelText: AppLocalizations.of(context).gaz,
                       minLines: 1,
                       maxLines: 2,
                       controller: gazTextEditingController,
@@ -183,7 +184,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "K.m?",
+                      labelText: AppLocalizations.of(context).km,
                       minLines: 1,
                       maxLines: 2,
                       controller: kmTextEditingController,
@@ -195,7 +196,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "Price ? ",
+                      labelText: AppLocalizations.of(context).price,
                       minLines: 1,
                       maxLines: 2,
                       controller: priceTextEditingController,
@@ -207,7 +208,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText: "Phone ",
+                      labelText:AppLocalizations.of(context).phone,
                       minLines: 1,
                       maxLines: 2,
                       controller: phoneTextEditingController,
@@ -220,7 +221,7 @@ class _AddScreenState extends State<AddScreen> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     child: customTextField(
-                      labelText: "Nots",
+                      labelText:AppLocalizations.of(context).not,
                       minLines: 1,
                       maxLines: 2,
                       controller: notTextEditingController,
@@ -239,7 +240,7 @@ class _AddScreenState extends State<AddScreen> {
                           activeColor: Colors.black,
                           value: installment,
                           onChanged: _manyTime),
-                      Text("installment"),
+                      Text(AppLocalizations.of(context).installment),
                       SizedBox(
                         width: 100.0,
                       ),
@@ -302,7 +303,7 @@ class _AddScreenState extends State<AddScreen> {
                                   BorderRadius.all(Radius.circular(6.0))),
                           height: 80.0,
                           child: Center(
-                              child: Text("Sale a car",
+                              child: Text(AppLocalizations.of(context).salecar,
                                   style: TextStyle(color: Colors.white))))),
                 )
               ],
@@ -354,9 +355,9 @@ class _AddScreenState extends State<AddScreen> {
         context: context,
         builder: (BuildContext context) {
           return CustomDialog(
-            title: "Media picker",
-            text1: "Pick an Image",
-            text2: "Pick a video",
+            title:AppLocalizations.of(context).mediapicker,
+            text1: AppLocalizations.of(context).pickimage,
+            text2: AppLocalizations.of(context).pickvideo,
             onTap: () {
               pickImageAndVideo(ImageSource.gallery, context: context);
               Navigator.pop(context);
@@ -374,7 +375,7 @@ class _AddScreenState extends State<AddScreen> {
   void checkIfFieldNotEmpty() {
     try {
       if (_imageFile == null) {
-        show("image can\'t be empty");
+        show(AppLocalizations.of(context).showimage);
         // }else if(_videoFile==null){
         //   show("Video can\'t be empty");
         // } else if(brandTextEditingController.text.isEmpty){
@@ -446,9 +447,7 @@ class _AddScreenState extends State<AddScreen> {
   }
 
 // this method for upload to fire store
-  Future<void> uploadToFirestore(
-    String url,
-  ) async {
+  Future<void> uploadToFirestore(String url) async {
     try {
       saleCarReference.add({
         "postId": currentUser.uid.toString(),

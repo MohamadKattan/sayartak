@@ -1,0 +1,236 @@
+{
+    "login": "LogIn",
+    "@login": {
+      "description": "The conventional newborn programmer greeting"
+    },
+    "email": "email",
+        "@email": {
+          "description": "The conventional newborn programmer greeting"
+     },
+     "password": "pass word",
+          "@password": {
+              "description": "The conventional newborn programmer greeting"
+     },
+      "noaccount": "Already don't have an account",
+         "@noaccount": {
+              "description": "The conventional newborn programmer greeting"
+     },
+
+    "register": "Register",
+         "@register": {
+               "description": "The conventional newborn programmer greeting"
+     },
+
+     "or": "Or",
+       "@or": {
+               "description": "The conventional newborn programmer greeting"
+     },
+   "googlelogin": "Login by google account",
+     "@googlelogin": {
+       "description": "The conventional newborn programmer greeting"
+   },
+  "facebook": "Login by FaceBook account",
+    "@facebook": {
+       "description": "The conventional newborn programmer greeting"
+  },
+   "show1": "Email can't be empty",
+      "@show1": {
+       "description": "The conventional newborn programmer greeting"
+   },
+   "show2": "PassWord can't be empty",
+    "@show2": {
+       "description": "The conventional newborn programmer greeting"
+    },
+   "name": "Name",
+       "@name": {
+          "description": "The conventional newborn programmer greeting"
+       },
+
+   "haveaccount": "Already have an account :",
+       "@haveaccount": {
+          "description": "The conventional newborn programmer greeting"
+       },
+   "showimage": "Photo can't be empty",
+       "@showimage": {
+          "description": "The conventional newborn programmer greeting"
+       },
+   "showname": "Name can't be empty",
+       "@showname": {
+            "description": "The conventional newborn programmer greeting"
+       },
+   "title": "Sayartak",
+        "@title": {
+             "description": "The conventional newborn programmer greeting"
+        },
+   "welcome": "Welcome",
+        "@welcome": {
+             "description": "The conventional newborn programmer greeting"
+        },
+  "username": "{username}",
+        "@username": {
+             "description": "The conventional newborn programmer greeting",
+             "placecholders":{"username":{"type":"String"}}
+        },
+  "yourprofile": "Your Profile",
+        "@yourprofile": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"favoritecar": "YOUR Favorite cars",
+        "@favoritecar": {
+             "description": "The conventional newborn programmer greeting"
+        },
+
+"mycar": "My cars",
+        "@mycar": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"logout": "Log out",
+        "@logout": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"salecar": "Sale a car",
+        "@salecar": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"newcar": "New cars",
+        "@newcar": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"usedcar": "Used cars",
+        "@usedcar": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"notification": "Notifications",
+        "@notification": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"gallery": "galleries",
+        "@gallery": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"towtruck": "Rescue service",
+        "@towtruck": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"addcar": "Add a car",
+        "@addcar": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"image": "Image",
+        "@image": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"mediapicker": "Media picker",
+        "@mediapicker": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"pickimage": "Pick image",
+        "@pickimage": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"pickvideo": "Pick video",
+        "@pickvideo": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"cancel": "Cancel",
+        "@cancel": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"brand": "Brand",
+        "@brand": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"model": "Model",
+        "@model": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"city": "City",
+        "@city": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"gear": "gear box",
+        "@gear": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"color": "Color",
+        "@color": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"gaz": "petrol or esle?",
+        "@gaz": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"km": "K.m",
+        "@km": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"price": "Price",
+        "@price": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"phone": "Phone",
+        "@phone": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"not": "Notice",
+        "@not": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"installment": "installment",
+        "@installment": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"select": "select",
+        "@select": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"newCar": "newCar",
+        "@newCar": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"usedCar": "usedCar",
+        "@usedCar": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"cardetails": "Car details",
+        "@cardetails": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"statuscar": "Status car",
+        "@statuscar": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"search": "Search",
+        "@search": {
+             "description": "The conventional newborn programmer greeting"
+        },
+
+"address": "Address",
+        "@address": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"revolutions": " roadside assistance",
+        "@revolutions": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"road": " Rescue service on road 24/24 ",
+        "@road": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"rescue": "Rescue truck",
+        "@rescue": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"fix": "Wheel fix ",
+        "@fix": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"battery": "Battery charger ",
+        "@battery": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"callus": "Call us",
+        "@callus": {
+             "description": "The conventional newborn programmer greeting"
+        }
+}

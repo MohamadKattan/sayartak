@@ -5,7 +5,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sayartak/all_screens/home_screen.dart';
+import 'package:sayartak/all_screens/main_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 

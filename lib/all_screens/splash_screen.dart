@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sayartak/all_screens/home_screen.dart';
 import 'package:sayartak/all_screens/login_screen.dart';
+import 'package:sayartak/all_screens/main_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/service/auth_service.dart';
 import 'package:sayartak/service/locale_notficition.dart';

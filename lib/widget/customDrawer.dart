@@ -6,10 +6,12 @@ import 'package:sayartak/all_screens/login_screen.dart';
 import 'package:sayartak/all_screens/my_car.dart';
 import 'package:sayartak/all_screens/profile_screen.dart';
 import 'package:sayartak/confige.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomDrawer extends StatelessWidget {
   final Function closeDrawer;
   const CustomDrawer({Key key, this.closeDrawer}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class CustomDrawer extends StatelessWidget {
                         backgroundImage: AssetImage(
                           "images/splash.png",
                         )),
-                    Text("Welcome :",
+                    Text(AppLocalizations.of(context).welcome,
                         style: TextStyle(fontSize: 16.0, color: Colors.white)),
                     SizedBox(
                       height: 4,
@@ -56,7 +58,7 @@ class CustomDrawer extends StatelessWidget {
             },
             leading: Icon(Icons.person),
             title: Text(
-              "Your Profile",
+              AppLocalizations.of(context).yourprofile,
             ),
           ),
           Divider(
@@ -68,7 +70,7 @@ class CustomDrawer extends StatelessWidget {
               debugPrint("Tapped settings");
             },
             leading: Icon(Icons.notifications_rounded),
-            title: Text("Nonfiction"),
+            title: Text(AppLocalizations.of(context).notification),
           ),
           Divider(
             height: 1,
@@ -79,7 +81,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder:(context)=>FavoriteScreen()));
             },
             leading: Icon(Icons.favorite),
-            title: Text("Favorite cars"),
+            title: Text(AppLocalizations.of(context).favoritecar),
           ),
           Divider(
             height: 1,
@@ -89,7 +91,7 @@ class CustomDrawer extends StatelessWidget {
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => MyCars())),
             leading: Icon(Icons.auto_awesome_motion),
-            title: Text("My cars"),
+            title: Text(AppLocalizations.of(context).mycar),
           ),
           Divider(
             height: 1,
@@ -104,7 +106,7 @@ class CustomDrawer extends StatelessWidget {
                   (route) => false);
             },
             leading: Icon(Icons.exit_to_app),
-            title: Text("Log Out"),
+            title: Text(AppLocalizations.of(context).logout),
           ),
         ],
       ),
