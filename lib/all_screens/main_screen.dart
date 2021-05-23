@@ -4,18 +4,19 @@ import 'package:sayartak/all_screens/add_car_screen.dart';
 import 'package:sayartak/all_screens/galleries_screen.dart';
 import 'package:sayartak/all_screens/new_car_screen.dart';
 import 'package:sayartak/all_screens/notifications_screen.dart';
+import 'package:sayartak/all_screens/payment_screen.dart';
 import 'package:sayartak/all_screens/towtruck_screen.dart';
 import 'package:sayartak/all_screens/used_car.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sayartak/widget/customDrawer.dart';
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-
       child: Scaffold(
         drawer: CustomDrawer(),
-        appBar:AppBar(
+        appBar: AppBar(
           title: Text(AppLocalizations.of(context).title),
           centerTitle: false,
           backgroundColor: Colors.black,
@@ -158,7 +159,10 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       GestureDetector(
-                        onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationScreen())),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NotificationScreen())),
                         child: Container(
                           height: MediaQuery.of(context).size.height * 20 / 100,
                           width: MediaQuery.of(context).size.width * 30 / 100,
@@ -177,7 +181,8 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset("images/notification-01.png", height: 50),
+                                Image.asset("images/notification-01.png",
+                                    height: 50),
                                 SizedBox(
                                   height: 2,
                                 ),
@@ -191,7 +196,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () =>Navigator.push(context, MaterialPageRoute(builder:(context)=> GalleriesScreen())),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GalleriesScreen())),
                         child: Container(
                           height: MediaQuery.of(context).size.height * 20 / 100,
                           width: MediaQuery.of(context).size.width * 30 / 100,
@@ -224,8 +232,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: ()=>Navigator.push(context, MaterialPageRoute(builder:(context)=> TowTruckScreen())),
-
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TowTruckScreen())),
                         child: Container(
                           height: MediaQuery.of(context).size.height * 20 / 100,
                           width: MediaQuery.of(context).size.width * 30 / 100,

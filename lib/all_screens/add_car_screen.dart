@@ -1,20 +1,18 @@
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sayartak/all_screens/main_screen.dart';
+import 'package:sayartak/all_screens/payment_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:sayartak/widget/custom_dialog.dart';
 import 'package:sayartak/widget/custom_drop_button.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
-import 'package:uuid/uuid.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-var uuid = Uuid();
+
 
 class AddScreen extends StatefulWidget {
   AddScreen({Key key}) : super(key: key);
@@ -28,7 +26,6 @@ class _AddScreenState extends State<AddScreen> {
   PickedFile _imageFile;
   PickedFile _videoFile;
   dynamic _pickImageError;
-  String carId = uuid.v1();
   bool isVideo = false;
   bool installment = false;
   bool isLoading = false;
@@ -76,7 +73,7 @@ class _AddScreenState extends State<AddScreen> {
                           itemBuilder: (context, index) {
                             return Container(
                               child: Image.file(
-                                File(_imageFile.path),
+                                File(_imageFile.path==null?Text(""):_imageFile.path),
                                 fit: BoxFit.fill,
                               ),
                             );
@@ -400,7 +397,7 @@ class _AddScreenState extends State<AddScreen> {
         show("Choice if car new or Used!!");
       } else {
         print("to Storage");
-        upLoadToStorage();
+      puchToPaymentScreen();
       }
     } catch (ex) {
       show("Some thing went wrong");
@@ -419,64 +416,6 @@ class _AddScreenState extends State<AddScreen> {
         fontSize: 16.0);
   }
 
-// this method for upload image to Storage
-  Future<void> upLoadToStorage() async {
-    try {
-      setState(() {
-        isLoading = true;
-      });
-      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
-          .ref()
-          .child('car')
-          .child(carId);
-      firebase_storage.UploadTask uploadTask =
-          ref.putFile(File(_imageFile.path));
-      String url = await uploadTask.then((url) {
-        return ref.getDownloadURL();
-      });
-      print("don in storage now to firestore::::" + uploadTask.toString());
-      await downloadUrl(url);
-    } catch (exStorage) {
-      print("errorUploadStorage:::" + exStorage.toString());
-    }
-  }
-
-  Future<void> downloadUrl(String url) async {
-    print(url);
-    return await uploadToFirestore(url);
-  }
-
-// this method for upload to fire store
-  Future<void> uploadToFirestore(String url) async {
-    try {
-      saleCarReference.add({
-        "postId": currentUser.uid.toString(),
-        "image": url,
-        "video": null,
-        "brand": brandTextEditingController.text,
-        "model": modelTextEditingController.text,
-        "city": cityTextEditingController.text,
-        "color": colorTextEditingController.text,
-        "price": priceTextEditingController.text,
-        "km": kmTextEditingController.text,
-        "phone": phoneTextEditingController.text,
-        "gaz": gazTextEditingController.text,
-        "gear": gearTextEditingController.text,
-        "not": notTextEditingController.text,
-        "statusCar": dropdownValue.toString(),
-        "installment": installment ? "Available" : "Not available",
-      });
-      print("don upload data to cloud");
-      setState(() {
-        isLoading = false;
-      });
-      await clearList();
-    } catch (ex) {
-      show("some thing went wrong");
-      print("errorUploadToFirestore::" + ex.toString());
-    }
-  }
-
   clearList() {
     _imageFile = null;
     _videoFile = null;
@@ -492,9 +431,17 @@ class _AddScreenState extends State<AddScreen> {
     phoneTextEditingController.clear();
     dropdownValue = 'select';
     installment = false;
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return HomeScreen();
-    }));
+    // Navigator.push(context, MaterialPageRoute(builder: (context) {
+    //   return HomeScreen();
+    // }));
     print("clear and pop");
+  }
+
+ Future <void> puchToPaymentScreen()async {
+   await  Navigator.push(context,MaterialPageRoute(builder:(context)=>PaymentScreen(
+      imageFile1: _imageFile,
+      dropdownValue1: dropdownValue,
+      installment1: installment,
+    )));
   }
 }

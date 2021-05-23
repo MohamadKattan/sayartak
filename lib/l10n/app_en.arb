@@ -88,7 +88,7 @@
         "@logout": {
              "description": "The conventional newborn programmer greeting"
         },
-"salecar": "Sale a car",
+"salecar": "Publish a car by 10$",
         "@salecar": {
              "description": "The conventional newborn programmer greeting"
         },

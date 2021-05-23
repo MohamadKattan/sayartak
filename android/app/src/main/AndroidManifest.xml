@@ -1,11 +1,21 @@
 <?xml version="1.0"?>
 
-   <manifest package="com.kattanSoftware.sayartak" xmlns:android="http://schemas.android.com/apk/res/android">
+   <manifest
+    package="com.kattanSoftware.sayartak"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
 
-    -<application android:icon="@mipmap/ic_launcher" android:label="sayartak">
+    -<application
+    android:icon="@mipmap/ic_launcher"
+    android:label="sayartak"
+    tools:replace="android:label"
+    >
 
 
     -<activity

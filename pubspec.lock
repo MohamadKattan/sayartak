@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.0-nullsafety.1"
+  awesome_card:
+    dependency: "direct main"
+    description:
+      name: awesome_card
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -160,6 +167,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_credit_card:
+    dependency: "direct main"
+    description:
+      name: flutter_credit_card
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   flutter_facebook_auth:
     dependency: "direct main"
     description:
@@ -239,7 +253,7 @@ packages:
     source: hosted
     version: "0.9.2"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
