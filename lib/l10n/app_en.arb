@@ -232,5 +232,34 @@
 "callus": "Call us",
         "@callus": {
              "description": "The conventional newborn programmer greeting"
+        },
+"cardnumber" : "Card number",
+        "@cardnumber": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"moutheexpiry" : "Mouth expiry",
+        "@moutheexpiry": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"yearexpiry" : "Year expiry",
+        "@yearexpiry": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"holdername" : "Holder name",
+        "@holdername": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"pay" : "Pay",
+        "@pay": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"cancel" : "cancel",
+        "@cancel": {
+             "description": "The conventional newborn programmer greeting"
+        },
+"checkcard" : "Check  info your card ",
+        "@checkcard": {
+             "description": "The conventional newborn programmer greeting"
         }
+
 }

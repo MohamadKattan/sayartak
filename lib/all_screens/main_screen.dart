@@ -4,7 +4,6 @@ import 'package:sayartak/all_screens/add_car_screen.dart';
 import 'package:sayartak/all_screens/galleries_screen.dart';
 import 'package:sayartak/all_screens/new_car_screen.dart';
 import 'package:sayartak/all_screens/notifications_screen.dart';
-import 'package:sayartak/all_screens/payment_screen.dart';
 import 'package:sayartak/all_screens/towtruck_screen.dart';
 import 'package:sayartak/all_screens/used_car.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -60,11 +59,13 @@ class HomeScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 2,
                                 ),
-                                Text(
-                                  AppLocalizations.of(context).salecar,
-                                  style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w400),
+                                Center(
+                                  child: Text(
+                                    AppLocalizations.of(context).salecar,
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w400),overflow:TextOverflow.ellipsis,
+                                  ),
                                 )
                               ]),
                         ),

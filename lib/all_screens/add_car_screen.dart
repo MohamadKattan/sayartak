@@ -12,8 +12,6 @@ import 'package:sayartak/widget/custom_drop_button.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
-
 class AddScreen extends StatefulWidget {
   AddScreen({Key key}) : super(key: key);
   @override
@@ -73,7 +71,9 @@ class _AddScreenState extends State<AddScreen> {
                           itemBuilder: (context, index) {
                             return Container(
                               child: Image.file(
-                                File(_imageFile.path==null?Text(""):_imageFile.path),
+                                File(_imageFile.path == null
+                                    ? Text("")
+                                    : _imageFile.path),
                                 fit: BoxFit.fill,
                               ),
                             );
@@ -112,6 +112,7 @@ class _AddScreenState extends State<AddScreen> {
                       labelText: AppLocalizations.of(context).brand,
                       minLines: 1,
                       maxLines: 2,
+                      maxLength: 10,
                       controller: brandTextEditingController,
                       textInputType: TextInputType.text,
                     ),
@@ -124,6 +125,7 @@ class _AddScreenState extends State<AddScreen> {
                       labelText: AppLocalizations.of(context).model,
                       minLines: 1,
                       maxLines: 2,
+                      maxLength: 8,
                       controller: modelTextEditingController,
                       textInputType: TextInputType.text,
                     ),
@@ -205,7 +207,7 @@ class _AddScreenState extends State<AddScreen> {
                   padding: EdgeInsets.all(4.0),
                   child: Container(
                     child: customTextField(
-                      labelText:AppLocalizations.of(context).phone,
+                      labelText: AppLocalizations.of(context).phone,
                       minLines: 1,
                       maxLines: 2,
                       controller: phoneTextEditingController,
@@ -218,7 +220,7 @@ class _AddScreenState extends State<AddScreen> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     child: customTextField(
-                      labelText:AppLocalizations.of(context).not,
+                      labelText: AppLocalizations.of(context).not,
                       minLines: 1,
                       maxLines: 2,
                       controller: notTextEditingController,
@@ -261,7 +263,8 @@ class _AddScreenState extends State<AddScreen> {
                               onChanged: (String newValue) {
                                 setState(() {
                                   if (dropdownValue != null) {
-                                    return dropdownValue = newValue;
+                                    dropdownValue = newValue;
+                                    return true;
                                   } else {
                                     return null;
                                   }
@@ -352,7 +355,7 @@ class _AddScreenState extends State<AddScreen> {
         context: context,
         builder: (BuildContext context) {
           return CustomDialog(
-            title:AppLocalizations.of(context).mediapicker,
+            title: AppLocalizations.of(context).mediapicker,
             text1: AppLocalizations.of(context).pickimage,
             text2: AppLocalizations.of(context).pickvideo,
             onTap: () {
@@ -396,8 +399,8 @@ class _AddScreenState extends State<AddScreen> {
       } else if (dropdownValue == "select") {
         show("Choice if car new or Used!!");
       } else {
-        print("to Storage");
-      puchToPaymentScreen();
+        print("to  puchToPaymentScreen");
+        puchToPaymentScreen();
       }
     } catch (ex) {
       show("Some thing went wrong");
@@ -416,32 +419,17 @@ class _AddScreenState extends State<AddScreen> {
         fontSize: 16.0);
   }
 
-  clearList() {
-    _imageFile = null;
-    _videoFile = null;
-    brandTextEditingController.clear();
-    modelTextEditingController.clear();
-    cityTextEditingController.clear();
-    gearTextEditingController.clear();
-    colorTextEditingController.clear();
-    gazTextEditingController.clear();
-    kmTextEditingController.clear();
-    priceTextEditingController.clear();
-    notTextEditingController.clear();
-    phoneTextEditingController.clear();
-    dropdownValue = 'select';
-    installment = false;
-    // Navigator.push(context, MaterialPageRoute(builder: (context) {
-    //   return HomeScreen();
-    // }));
-    print("clear and pop");
-  }
 
- Future <void> puchToPaymentScreen()async {
-   await  Navigator.push(context,MaterialPageRoute(builder:(context)=>PaymentScreen(
-      imageFile1: _imageFile,
-      dropdownValue1: dropdownValue,
-      installment1: installment,
-    )));
+  Future<void> puchToPaymentScreen() async {
+
+     Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PaymentScreen(
+                  image: _imageFile,
+                  dropdownValue: dropdownValue,
+                  installment: installment,
+                )));
+
   }
 }

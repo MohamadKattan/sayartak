@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:sayartak/all_screens/notifications_screen.dart';
 
 class LocaleNotifications extends ChangeNotifier {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -42,7 +41,7 @@ class LocaleNotifications extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> weeklyNotifications() async {
+  Future<void> publishDon () async {
     var android = AndroidNotificationDetails(
         "channelId", "channelName", "channelDescription",
         importance: Importance.max,
@@ -51,14 +50,8 @@ class LocaleNotifications extends ChangeNotifier {
         showWhen: false);
     var ios = IOSNotificationDetails();
     var platform = new NotificationDetails(android: android, iOS: ios);
-    await flutterLocalNotificationsPlugin.showWeeklyAtDayAndTime(
-      0,
-      "Welcome with sayartak",
-      "with us will find Waht do you need",
-      Day(1),
-      Time(20, 30, 03),
-      platform,
-    );
+    await flutterLocalNotificationsPlugin
+        .show(0, "Publish Success","We wish for you good deal", platform, payload: "enjoy");
     notifyListeners();
   }
 

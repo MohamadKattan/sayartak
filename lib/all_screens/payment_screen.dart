@@ -1,30 +1,21 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:awesome_card/awesome_card.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sayartak/all_screens/main_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/payment_model.dart';
 import 'package:sayartak/service/payment_repo.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
-import 'package:uuid/uuid.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-
-var uuid = Uuid();
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentScreen extends StatefulWidget {
-  final PickedFile imageFile1;
-  final PickedFile videoFile;
-  final String dropdownValue1;
-  final bool installment1;
+  final PickedFile image;
+  final String dropdownValue;
+  final bool installment;
   const PaymentScreen(
-      {Key key,
-      this.installment1,
-      this.dropdownValue1,
-      this.imageFile1,
-      this.videoFile})
+      {Key key, this.dropdownValue, this.image, this.installment})
       : super(key: key);
+
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
@@ -37,7 +28,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
   String cvv = "";
   bool showBack = false;
   FocusNode _focusNode;
-  String carId = uuid.v1();
   bool _isLoading = false;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -62,11 +52,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: formKey,
-        appBar: AppBar(
-          title: Text(" PaymentScreen"),
-          centerTitle: false,
-          backgroundColor: Colors.black,
-        ),
         body: SafeArea(
           child: Stack(
             children: [
@@ -76,7 +61,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   SizedBox(height: 10),
                   CreditCard(
                     cardNumber: cardNumber,
-                    cardExpiry: "${expiryDateMouthe + expiryDateYear}",
+                    cardExpiry: "${expiryDateMouthe+"/"+expiryDateYear}",
                     cvv: cvv,
                     cardHolderName: cardHolderName,
                     showBackSide: showBack,
@@ -89,7 +74,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       horizontal: 20,
                     ),
                     child: TextFormField(
-                      decoration: InputDecoration(hintText: "Card Number"),
+                      decoration: InputDecoration(hintText:"card Number"),
                       maxLength: 16,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
@@ -160,31 +145,66 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       },
                     ),
                   ),
-                  RaisedButton(
-                      child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Text(
-                            "Pay",
-                            style: TextStyle(fontSize: 14, color: Colors.blue),
-                          )),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      onPressed: () async {
-                        PaymentCard card = PaymentCard(
-                            ccv: cvv,
-                            number: cardNumber,
-                            expiryMonth: expiryDateMouthe,
-                            expiryYear: expiryDateYear);
-                        PaymentRepo _repo = PaymentRepo();
-                        await _repo.makePayment(card, 1000, "USD");
-                        await upLoadToStorage().whenComplete(() {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
-                        });
-                      }),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      RaisedButton(
+                          child: Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Text(
+                                "Pay",
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.green[700]),
+                              )),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          onPressed: () async {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            PaymentCard card = PaymentCard(
+                                ccv: cvv,
+                                number: cardNumber,
+                                expiryMonth: expiryDateMouthe,
+                                expiryYear: expiryDateYear);
+                            PaymentRepo _repo = PaymentRepo();
+                            await _repo.makePayment(
+                                card,
+                                1000,
+                                "USD",
+                                context,
+                                widget.image,
+                                widget.installment,
+                                widget.dropdownValue);
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return HomeScreen();
+                            }));
+                          }),
+                      RaisedButton(
+                          child: Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.redAccent[700]),
+                              )),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          onPressed: () async {
+                          await  clearList();
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeScreen()),
+                                (route) => false);
+                          }),
+                    ],
+                  ),
                   SizedBox(
                     height: 15.0,
                   ),
@@ -194,72 +214,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
         ));
   }
-
-  // this method for upload image to Storage
-  Future<void> upLoadToStorage() async {
-    try {
-      setState(() {
-        _isLoading = true;
-      });
-      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
-          .ref()
-          .child('car')
-          .child(carId);
-      firebase_storage.UploadTask uploadTask =
-          ref.putFile(File(widget.imageFile1.path));
-      String url = await uploadTask.then((url) {
-        return ref.getDownloadURL();
-      });
-      print("don in storage now to firestore::::" + uploadTask.toString());
-      await downloadUrl(url);
-    } catch (exStorage) {
-      print("errorUploadStorage:::" + exStorage.toString());
-    }
-  }
-
-  Future<void> show(String msg) async {
-    Fluttertoast.showToast(
-        msg: msg,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red[700],
-        textColor: Colors.white,
-        fontSize: 16.0);
-  }
-
-  Future<void> downloadUrl(String url) async {
-    print(url);
-    return await uploadToFirestore(url);
-  }
-
-// this method for upload to fire store
-  Future<void> uploadToFirestore(String url) async {
-    try {
-      saleCarReference.add({
-        "postId": currentUser.uid.toString(),
-        "image": url,
-        "video": null,
-        "brand": brandTextEditingController.text,
-        "model": modelTextEditingController.text,
-        "city": cityTextEditingController.text,
-        "color": colorTextEditingController.text,
-        "price": priceTextEditingController.text,
-        "km": kmTextEditingController.text,
-        "phone": phoneTextEditingController.text,
-        "gaz": gazTextEditingController.text,
-        "gear": gearTextEditingController.text,
-        "not": notTextEditingController.text,
-        "statusCar": widget.dropdownValue1.toString(),
-        "installment": widget.installment1 ? "Available" : "Not available",
-      });
-      print("don upload data to cloud");
-      setState(() {
-        _isLoading = false;
-      });
-    } catch (ex) {
-      show("some thing went wrong");
-      print("errorUploadToFirestore::" + ex.toString());
-    }
+  clearList() {
+    brandTextEditingController.clear();
+    modelTextEditingController.clear();
+    cityTextEditingController.clear();
+    gearTextEditingController.clear();
+    colorTextEditingController.clear();
+    gazTextEditingController.clear();
+    kmTextEditingController.clear();
+    priceTextEditingController.clear();
+    notTextEditingController.clear();
+    phoneTextEditingController.clear();
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return HomeScreen();
+    }));
+    print("clear and pop");
   }
 }

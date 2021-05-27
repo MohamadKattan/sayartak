@@ -66,9 +66,11 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "${AppLocalizations.of(context).brand}:${widget.saleCarDetails.brand} ${widget.saleCarDetails.model}",
-                  style: TextStyle(fontSize: 18.0),
+                Expanded(
+                  child: Text(
+                    "${AppLocalizations.of(context).brand}:${widget.saleCarDetails.brand} ${widget.saleCarDetails.model}",
+                    style: TextStyle(fontSize: 18.0),overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
