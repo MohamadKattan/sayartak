@@ -52,7 +52,7 @@ class UsedCarScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 SaleCar saleCar =
                     SaleCar.fromMap(snapshots.data.docs[index].data());
-                return carList(context, saleCar);
+                return carList(context, saleCar,snapshots,index);
               },
             );
           }
@@ -66,7 +66,7 @@ class UsedCarScreen extends StatelessWidget {
     );
   }
 
-  Widget carList(BuildContext context, SaleCar saleCar) {
+  Widget carList(BuildContext context, SaleCar saleCar, AsyncSnapshot<QuerySnapshot> snapshots, int i,) {
     return Column(
       children: [
         SizedBox(height: 16.0),
@@ -81,7 +81,7 @@ class UsedCarScreen extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => CarDetails(
                                 saleCarDetails: saleCar,
-                                // idLike: id,
+                                idLike: snapshots.data.docs[i].id,
                               )));
                 },
                 child: Container(

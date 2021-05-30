@@ -9,7 +9,7 @@ import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentScreen extends StatefulWidget {
-  final PickedFile image;
+    final  PickedFile image;
   final String dropdownValue;
   final bool installment;
   const PaymentScreen(
@@ -74,7 +74,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       horizontal: 20,
                     ),
                     child: TextFormField(
-                      decoration: InputDecoration(hintText:"card Number"),
+                      decoration: InputDecoration(hintText:AppLocalizations.of(context).cardnumber),
                       maxLength: 16,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
@@ -105,7 +105,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       horizontal: 20,
                     ),
                     child: TextFormField(
-                      decoration: InputDecoration(hintText: "Mouthe Expiry"),
+                      decoration: InputDecoration(hintText:AppLocalizations.of(context).moutheexpiry),
                       maxLength: 2,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
@@ -120,7 +120,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       horizontal: 20,
                     ),
                     child: TextFormField(
-                      decoration: InputDecoration(hintText: "Year expiry"),
+                      decoration: InputDecoration(hintText:AppLocalizations.of(context).yearexpiry),
                       maxLength: 2,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
@@ -135,7 +135,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       horizontal: 20,
                     ),
                     child: TextFormField(
-                      decoration: InputDecoration(hintText: "Holder Name"),
+                      decoration: InputDecoration(hintText:AppLocalizations.of(context).holdername),
                       maxLength: 19,
                       keyboardType: TextInputType.name,
                       onChanged: (value) {
@@ -152,7 +152,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           child: Padding(
                               padding: const EdgeInsets.all(12),
                               child: Text(
-                                "Pay",
+                                AppLocalizations.of(context).pay,
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.green[700]),
                               )),
@@ -180,15 +180,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             setState(() {
                               _isLoading = false;
                             });
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return HomeScreen();
-                            }));
+
                           }),
                       RaisedButton(
                           child: Padding(
                               padding: const EdgeInsets.all(12),
                               child: Text(
-                                "Cancel",
+                                AppLocalizations.of(context).cancel,
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.redAccent[700]),
                               )),

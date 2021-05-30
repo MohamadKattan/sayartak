@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sayartak/all_screens/payment_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
-import 'package:sayartak/widget/custom_dialog.dart';
 import 'package:sayartak/widget/custom_drop_button.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,9 +21,9 @@ class _AddScreenState extends State<AddScreen> {
   final ImagePicker _picker = ImagePicker();
   GlobalKey<ScaffoldState> globalKey = GlobalKey();
   PickedFile _imageFile;
+  // List<String> imagePaths = [];
   PickedFile _videoFile;
   dynamic _pickImageError;
-  bool isVideo = false;
   bool installment = false;
   bool isLoading = false;
   String dropdownValue = 'select';
@@ -44,8 +43,9 @@ class _AddScreenState extends State<AddScreen> {
                     Icons.add,
                     color: Colors.white,
                   ),
-                  onPressed: () async {
-                    _shoowdialog();
+                  onPressed: ()  {
+                    pickImageAndVideo(ImageSource.gallery, context: context);
+                    // _shoowdialog();
                     print("addImage");
                   }),
             ],
@@ -64,41 +64,41 @@ class _AddScreenState extends State<AddScreen> {
                 SizedBox(
                   height: 15.0,
                 ),
-                _imageFile != null
+                _imageFile!= null
                     ? SizedBox(
                         height: 200,
                         child: ListView.builder(
                           itemBuilder: (context, index) {
                             return Container(
                               child: Image.file(
-                                File(_imageFile.path == null
+                                File(_imageFile.path== null
                                     ? Text("")
                                     : _imageFile.path),
                                 fit: BoxFit.fill,
                               ),
                             );
                           },
-                          itemCount: 1,
+                          itemCount:1,
                           scrollDirection: Axis.horizontal,
                         ))
-                    : Container(),
-                _videoFile != null
-                    ? SizedBox(
-                        height: 200,
-                        child: ListView.builder(
-                          itemBuilder: (context, index) {
-                            return Container(
-                              child: Icon(
-                                Icons.play_arrow,
-                                size: 35.0,
-                                color: Colors.black,
-                              ),
-                            );
-                          },
-                          itemCount: 1,
-                          scrollDirection: Axis.horizontal,
-                        ))
-                    : Container(),
+                    : Text(""),
+                // _videoFile != null
+                //     ? SizedBox(
+                //         height: 200,
+                //         child: ListView.builder(
+                //           itemBuilder: (context, index) {
+                //             return Container(
+                //               child: Icon(
+                //                 Icons.play_arrow,
+                //                 size: 35.0,
+                //                 color: Colors.black,
+                //               ),
+                //             );
+                //           },
+                //           itemCount: 1,
+                //           scrollDirection: Axis.horizontal,
+                //         ))
+                //     : Container(),
                 SizedBox(
                   height: 10,
                 ),
@@ -324,23 +324,16 @@ class _AddScreenState extends State<AddScreen> {
   // this method for pickImage+video
   void pickImageAndVideo(ImageSource source, {BuildContext context}) async {
     try {
-      if (isVideo) {
-        final pPickedFile = await _picker.getVideo(
-            source: source, maxDuration: const Duration(seconds: 10));
-        setState(() {
-          _videoFile = pPickedFile;
-        });
-      } else {
-        final pickedFile = await _picker.getImage(
-          source: source,
-          maxWidth: 200.0,
-          maxHeight: 350.0,
-          imageQuality: 80,
-        );
-        setState(() {
-          _imageFile = pickedFile;
-        });
-      }
+      final pickedFile = await _picker.getImage(
+        source: source,
+        maxWidth: 200.0,
+        maxHeight: 350.0,
+        imageQuality: 80,
+      );
+      setState(() {
+        _imageFile = pickedFile;
+        // imagePaths.add(pickedFile.path);
+      });
     } catch (ex) {
       setState(() {
         _pickImageError = ex;
@@ -350,35 +343,33 @@ class _AddScreenState extends State<AddScreen> {
   }
 
 // for show dialog when click video or image picker
-  void _shoowdialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CustomDialog(
-            title: AppLocalizations.of(context).mediapicker,
-            text1: AppLocalizations.of(context).pickimage,
-            text2: AppLocalizations.of(context).pickvideo,
-            onTap: () {
-              pickImageAndVideo(ImageSource.gallery, context: context);
-              Navigator.pop(context);
-            },
-            onTap1: () {
-              isVideo = true;
-              pickImageAndVideo(ImageSource.camera, context: context);
-              Navigator.pop(context);
-            },
-          );
-        });
-  }
+//   void _shoowdialog() {
+//     showDialog(
+//         context: context,
+//         builder: (BuildContext context) {
+//           return CustomDialog(
+//             title: AppLocalizations.of(context).mediapicker,
+//             text1: AppLocalizations.of(context).pickimage,
+//             text2: AppLocalizations.of(context).pickvideo,
+//             onTap: () {
+//               pickImageAndVideo(ImageSource.gallery, context: context);
+//               Navigator.pop(context);
+//             },
+//             onTap1: () {
+//               isVideo = true;
+//               pickImageAndVideo(ImageSource.camera, context: context);
+//               Navigator.pop(context);
+//             },
+//           );
+//         });
+//   }
 
 // this method for check if verbill is not null
   void checkIfFieldNotEmpty() {
     try {
       if (_imageFile == null) {
         show(AppLocalizations.of(context).showimage);
-        // }else if(_videoFile==null){
-        //   show("Video can\'t be empty");
-        // } else if(brandTextEditingController.text.isEmpty){
+        } else if(brandTextEditingController.text.isEmpty){
         show("brand car can\'t be empty");
       } else if (modelTextEditingController.text.isEmpty) {
         show("Model car can\'t be empty");

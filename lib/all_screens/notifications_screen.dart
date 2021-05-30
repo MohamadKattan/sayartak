@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/notification.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sayartak/provider/notifiction_provider.dart';
 
 class NotificationScreen extends StatelessWidget {
   @override
@@ -19,21 +21,38 @@ class NotificationScreen extends StatelessWidget {
             .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.data.docs.isEmpty) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.notifications_off_rounded,color: Colors.red[700],size: 60,),
-              Center(child: Text("No data yet")),
-            ],
-          );
-          }
-          else if(snapshot.hasError){
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.notifications_off_rounded,
+                  color: Colors.red[700],
+                  size: 60,
+                ),
+                Center(child: Text("No data yet")),
+              ],
+            );
+          } else if (snapshot.hasError) {
             return Center(child: Text("Some thing went wrong"));
+          } else if (snapshot == null) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.notifications_off_rounded,
+                  color: Colors.red[700],
+                  size: 60,
+                ),
+                Center(child: Text("No data yet")),
+              ],
+            );
           }
           return ListView.builder(
             itemBuilder: (context, index) {
               NotificationModel noty =
-              NotificationModel.fromMap(snapshot.data.docs[index].data());
+                  NotificationModel.fromMap(snapshot.data.docs[index].data());
+              Provider.of<NotifictionIndex>(context,listen: false)
+                  .countIndexNotifiction(index);
               return Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Column(
@@ -44,7 +63,7 @@ class NotificationScreen extends StatelessWidget {
                           backgroundImage: AssetImage("images/splash.png")),
                       title: Text(noty.title,
                           style:
-                          TextStyle(color: Colors.black, fontSize: 16.0)),
+                              TextStyle(color: Colors.black, fontSize: 16.0)),
                       subtitle: Text(noty.body,
                           style: TextStyle(color: Colors.blueGrey)),
                     ),

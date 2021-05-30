@@ -141,14 +141,11 @@ class NewCarScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding: EdgeInsets.all(4.0),
-                              child: Expanded(
-                                flex: 0,
-                                child: Text(
-                                    "${AppLocalizations.of(context).model} : ${saleCar.brand} ${saleCar.model}",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 14.0),overflow: TextOverflow.ellipsis,),
-                              ),
+                              child: Text(
+                                  "${AppLocalizations.of(context).model} : ${saleCar.brand} ${saleCar.model}",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14.0),overflow: TextOverflow.ellipsis,),
                             ),
                             Text(
                                 "${AppLocalizations.of(context).city}  : ${saleCar.city}",

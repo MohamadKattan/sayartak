@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/splash_screen.dart';
 import 'package:sayartak/provider/addCar.dart';
+import 'package:sayartak/provider/like_provider.dart';
+import 'package:sayartak/provider/notifiction_provider.dart';
 import 'package:sayartak/service/locale_notficition.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => AddCar()),
         ChangeNotifierProvider(create: (context) => LocaleNotifications()),
+        ChangeNotifierProvider(create: (context) => NotifictionIndex()),
+        ChangeNotifierProvider(create: (context) => LikeProvider()),
       ],
       child: MaterialApp(
         title: "sayartak",

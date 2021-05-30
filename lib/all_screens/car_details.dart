@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/full_image.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/model/sale_car_model.dart';
+import 'package:sayartak/provider/like_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,26 +17,25 @@ class CarDetails extends StatefulWidget {
 }
 
 class _CarDetailsState extends State<CarDetails> {
-  bool isLiked = false;
-
   @override
   Widget build(BuildContext context) {
+    String _likeProvider = Provider.of<LikeProvider>(context).likePro;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
         title: Text(AppLocalizations.of(context).cardetails),
         centerTitle: false,
         actions: [
-          !isLiked
-              ? IconButton(
-                  icon: Icon(Icons.favorite, color: Colors.white),
-                  onPressed: () {
-                    setState(() {
-                      isLiked=true;
-                      iLiked(context);
-                    });
-                  } )
-              : Icon(Icons.favorite, color: Colors.red),
+          IconButton(
+              icon: Icon(Icons.favorite,
+                  color:
+                       _likeProvider==currentUser.uid+widget.idLike
+                      ? Colors.red
+                      : Colors.white),
+              onPressed: () {
+                iLiked(context);
+              })
+          // : Icon(Icons.favorite, color: Colors.red),
         ],
       ),
       body: SingleChildScrollView(
@@ -69,7 +70,8 @@ class _CarDetailsState extends State<CarDetails> {
                 Expanded(
                   child: Text(
                     "${AppLocalizations.of(context).brand}:${widget.saleCarDetails.brand} ${widget.saleCarDetails.model}",
-                    style: TextStyle(fontSize: 18.0),overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 18.0),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -87,19 +89,24 @@ class _CarDetailsState extends State<CarDetails> {
             ]),
             Divider(),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppLocalizations.of(context).not} :  ${widget.saleCarDetails.not}",
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).not} :"),
+                Expanded(
+                  child: Container(
+                    child: Text("${widget.saleCarDetails.not}",
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 16.0)),
+                  ),
+                ),
               ],
             ),
             Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppLocalizations.of(context).city} :", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).city} :",
+                    style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.city}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -108,7 +115,8 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppLocalizations.of(context).km}:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).km}:",
+                    style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.km}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -117,7 +125,8 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppLocalizations.of(context).gear}:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).gear}:",
+                    style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.gear}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -126,7 +135,8 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppLocalizations.of(context).gaz}:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).gaz}:",
+                    style: TextStyle(fontSize: 16.0)),
                 Text("${widget.saleCarDetails.gaz}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -135,7 +145,8 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppLocalizations.of(context).brand}:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).brand}:",
+                    style: TextStyle(fontSize: 16.0)),
                 Text("${widget.saleCarDetails.brand}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -144,7 +155,8 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppLocalizations.of(context).model}:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).model}:",
+                    style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.model}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -153,7 +165,8 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppLocalizations.of(context).price}:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).price}:",
+                    style: TextStyle(fontSize: 16.0)),
                 Text("\$ ${widget.saleCarDetails.price}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -162,7 +175,8 @@ class _CarDetailsState extends State<CarDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppLocalizations.of(context).statuscar}:", style: TextStyle(fontSize: 16.0)),
+                Text("${AppLocalizations.of(context).statuscar}:",
+                    style: TextStyle(fontSize: 16.0)),
                 Text(" ${widget.saleCarDetails.statusCar}",
                     style: TextStyle(fontSize: 16.0)),
               ],
@@ -189,6 +203,8 @@ class _CarDetailsState extends State<CarDetails> {
         "statusCar": widget.saleCarDetails.statusCar,
         "installment": widget.saleCarDetails.installment,
       });
+      Provider.of<LikeProvider>(context,listen: false)
+          .updateLikePro(currentUser.uid+widget.idLike);
     } catch (ex) {}
   }
 }

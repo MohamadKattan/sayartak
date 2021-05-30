@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:sayartak/all_screens/main_screen.dart';
 import 'package:sayartak/model/payment_model.dart';
 import 'package:sayartak/service/set_car_fireStore.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -46,7 +47,7 @@ class PaymentRepo {
       int amount,
       String currency,
       BuildContext context,
-      PickedFile file,
+     PickedFile file,
       bool installment,
       String dropdownValue) async {
     var token = await _getToken(card);
@@ -63,9 +64,11 @@ class PaymentRepo {
       print(data["response_summary"]);
       SetCarTOFireStore store = SetCarTOFireStore();
       store.upLoadToStorage(context, file, installment, dropdownValue);
-      // Provider.of<SetCarTOFireStore>(context,listen: false).upLoadToStorage();
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return HomeScreen();
+      }));
     } else {
-      show(AppLocalizations.of(context).cardetails);
+      show(AppLocalizations.of(context).checkcard);
       print('Request payment failed with status: ${response.statusCode}.');
     }
     return null;

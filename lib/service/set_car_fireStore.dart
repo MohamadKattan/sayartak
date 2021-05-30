@@ -14,7 +14,7 @@ class SetCarTOFireStore extends ChangeNotifier {
   String carId = uuid.v1();
   LocaleNotifications notifications =LocaleNotifications();
   // this method for upload image to Storage
-  Future<void> upLoadToStorage(BuildContext context, PickedFile file,
+  Future<void> upLoadToStorage(BuildContext context,PickedFile file,
       bool installment, String dropdownValue) async {
     try {
       firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
@@ -49,7 +49,6 @@ class SetCarTOFireStore extends ChangeNotifier {
       String url, String dropdownValue, bool installment, BuildContext context) async {
     print(url);
     return await uploadToFirestore(url, dropdownValue, installment,context);
-    notifyListeners();
   }
 
 // this method for upload to fire store
@@ -59,7 +58,6 @@ class SetCarTOFireStore extends ChangeNotifier {
       await saleCarReference.add({
         "postId": currentUser.uid.toString(),
         "image": url,
-        "video": null,
         "brand": brandTextEditingController.text,
         "model": modelTextEditingController.text,
         "city": cityTextEditingController.text,

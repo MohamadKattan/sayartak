@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:sayartak/model/favorite_model.dart';
 import 'package:sayartak/model/new_gallery.dart';
 import 'package:sayartak/model/sale_car_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CallService{
-  static  launchCall(BuildContext context, SaleCar saleCar,) async {
+  static  launchCall(BuildContext context, SaleCar saleCar ) async {
     final url = 'tel://${saleCar.phone}';
     if (await canLaunch(url)) {
       await launch(url);
@@ -13,7 +14,7 @@ class CallService{
     }
   }
 
-  static launchMessage(BuildContext context, SaleCar saleCar,) async {
+  static launchMessage(BuildContext context, SaleCar saleCar) async {
     final url = 'sms://${saleCar.phone}';
     if (await canLaunch(url)) {
       await launch(url);

@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/service/locale_notficition.dart';
 import 'package:sayartak/widget/custom_text_failed.dart';
-
+import 'package:uuid/uuid.dart';
+var uuid = Uuid();
 class AdminTypeNotification extends StatelessWidget {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   final TextEditingController _controllerBody = TextEditingController();
   final TextEditingController _controllerTitle = TextEditingController();
+  final String notId = uuid.v1();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +43,7 @@ class AdminTypeNotification extends StatelessWidget {
             Center(
               child: Consumer<LocaleNotifications>(
                 builder: (context, model, _) => TextButton(
-                  onPressed: () => model.firstNotifications(_controllerBody,_controllerTitle).whenComplete(() =>setToFireStore()),
+                  onPressed: () => model.firstNotifications(_controllerBody,_controllerTitle).then((val) =>setToFireStore()),
                   child: Container(
                     color: Colors.black,
                     width: MediaQuery.of(context).size.width * 80 / 100,
@@ -62,14 +64,17 @@ class AdminTypeNotification extends StatelessWidget {
   }
 
 Future<void>  setToFireStore()async {
-    adminNotificationReference.doc().set({
-       "title":_controllerTitle.text,
-      "body":_controllerBody.text,
-      "timestamp":DateTime.now(),
-    });
-    await clear();
-  }
+ try{
+   await adminNotificationReference.doc(notId).set({
+     "title":_controllerTitle.text,
+     "body":_controllerBody.text,
+     "timestamp":DateTime.now(),
+   });
+   clear();
+ }catch(ex){print(ex.toString());}
 
+
+}
   clear() {
     _controllerTitle.clear();
     _controllerBody.clear();

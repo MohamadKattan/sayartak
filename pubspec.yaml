@@ -36,7 +36,6 @@ dependencies:
   cloud_firestore: ^0.14.3+1
   flutter_local_notifications: ^4.0.1+2
   url_launcher: ^5.7.10
-  foldable_sidebar: ^1.0.0
   google_sign_in: ^4.5.9
   flutter_facebook_auth: ^1.0.2+2
   uuid: ^2.2.2
@@ -49,6 +48,8 @@ dependencies:
   http: ^0.12.2
   awesome_card: ^1.1.0
   flutter_credit_card: ^0.1.4
+  carousel_pro: ^1.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

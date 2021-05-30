@@ -1,17 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/full_image.dart';
 import 'package:sayartak/confige.dart';
-import 'package:sayartak/model/sale_car_model.dart';
-import 'package:sayartak/service/call_message_service.dart';
+import 'package:sayartak/model/favorite_model.dart';
+import 'package:sayartak/provider/like_provider.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
@@ -43,9 +46,9 @@ class FavoriteScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: snapshots.data.docs.length,
               itemBuilder: (context, index) {
-                SaleCar saleCar =
-                    SaleCar.fromMap(snapshots.data.docs[index].data());
-                return carList(context, saleCar, snapshots, index);
+                FavoriteModel favoriteModel =
+                FavoriteModel.fromMap(snapshots.data.docs[index].data());
+                return carList(context, favoriteModel, snapshots, index);
               },
             );
           }
@@ -62,7 +65,7 @@ class FavoriteScreen extends StatelessWidget {
 // for show list of car from stream =>fireStore
   Widget carList(
     BuildContext context,
-    SaleCar saleCar,
+    FavoriteModel favoriteModel,
     snapshot,
     int i,
   ) {
@@ -77,7 +80,7 @@ class FavoriteScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => FullImage(
-                              image: saleCar.image,
+                              image: favoriteModel.image,
                             )));
               },
               child: Container(
@@ -115,9 +118,9 @@ class FavoriteScreen extends StatelessWidget {
                                 child: FadeInImage.memoryNetwork(
                                     fit: BoxFit.cover,
                                     placeholder: kTransparentImage,
-                                    image: saleCar.image)),
+                                    image: favoriteModel.image)),
                           ),
-                          Text(saleCar.statusCar.toString()),
+                          Text(favoriteModel.statusCar.toString()),
                           Row(
                             children: [
                               Icon(Icons.directions_car),
@@ -136,17 +139,17 @@ class FavoriteScreen extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(4.0),
                             child: Text(
-                                "${AppLocalizations.of(context).brand} : ${saleCar.brand} ${saleCar.model}",
+                                "${AppLocalizations.of(context).brand} : ${favoriteModel.brand} ${favoriteModel.model}",
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 14.0)),
                           ),
+                          // Text(
+                          //     "${AppLocalizations.of(context).city}  : ${saleCar.city}",
+                          //     style: TextStyle(
+                          //         color: Colors.grey, fontSize: 16.0)),
                           Text(
-                              "${AppLocalizations.of(context).city}  : ${saleCar.city}",
-                              style: TextStyle(
-                                  color: Colors.grey, fontSize: 16.0)),
-                          Text(
-                              "${AppLocalizations.of(context).km}  : ${saleCar.km}",
+                              "${AppLocalizations.of(context).km}  : ${favoriteModel.km}",
                               style: TextStyle(
                                   color: Colors.grey, fontSize: 16.0)),
                         ],
@@ -172,11 +175,11 @@ class FavoriteScreen extends StatelessWidget {
                           Row(children: [
                             IconButton(
                                 onPressed: () =>
-                                    CallService.launchCall(context, saleCar),
+                                    _launchCall(context, favoriteModel),
                                 icon: Icon(Icons.phone, color: Colors.green)),
                             IconButton(
                                 onPressed: () =>
-                                    CallService.launchMessage(context, saleCar),
+                                   _launchMessage(context, favoriteModel),
                                 icon: Icon(Icons.message, color: Colors.white)),
                           ]),
                           IconButton(
@@ -184,11 +187,13 @@ class FavoriteScreen extends StatelessWidget {
                                 favoriteCarReference
                                     .doc(snapshot.data.docs[i].id)
                                     .delete();
+                                Provider.of<LikeProvider>(context,listen: false).updateLikePro(favoriteModel.postLiked=null);
                               },
                               icon: Icon(
                                 Icons.delete,
                                 color: Colors.white,
-                              ))
+                              )),
+
                         ],
                       ),
                     )))
@@ -196,5 +201,22 @@ class FavoriteScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+    _launchCall(BuildContext context, FavoriteModel favoriteModel,  ) async {
+    final url = 'tel://${favoriteModel.phone}';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+   _launchMessage(BuildContext context, FavoriteModel favoriteModel,) async {
+    final url = 'sms://${favoriteModel.phone}';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

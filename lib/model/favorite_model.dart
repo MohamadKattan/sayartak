@@ -1,8 +1,7 @@
-
-
-class SaleCar {
+class FavoriteModel {
+  String postLiked;
   String video;
- String image;
+  String image;
   String brand;
   String model;
   String city;
@@ -15,28 +14,28 @@ class SaleCar {
   String not;
   String installment;
   String statusCar;
-  String postId;
   String likes;
-  SaleCar(
-      {this.postId,
-      this.brand,
-      this.city,
-      this.color,
-      this.gaz,
-      this.gear,
-      this.image,
-      this.installment,
-      this.km,
-      this.model,
-      this.statusCar,
-      this.not,
-      this.phone,
-      this.price,
-      this.video,
+  FavoriteModel(
+      {
+        this.postLiked,
+        this.brand,
+        this.city,
+        this.color,
+        this.gaz,
+        this.gear,
+        this.image,
+        this.installment,
+        this.km,
+        this.model,
+        this.statusCar,
+        this.not,
+        this.phone,
+        this.price,
+        this.video,
         this.likes,
       });
-  SaleCar.fromMap(Map<String, dynamic> mapData) {
-    postId = mapData['postId'];
+  FavoriteModel.fromMap(Map<String, dynamic> mapData) {
+    postLiked=mapData["postLiked"];
     video = mapData['video'];
     image = mapData['image'];
     brand = mapData['brand'];
