@@ -320,8 +320,10 @@ class HomeScreen extends StatelessWidget {
                         indicatorBgPadding: 7.0,
                         images: [
                           ExactAssetImage("images/splash.png"),
-                          ExactAssetImage("images/splash.png"),
-                          ExactAssetImage("images/splash.png"),
+                          ExactAssetImage("images/2.jpg"),
+                          ExactAssetImage("images/4.jpg"),
+                          ExactAssetImage("images/6.jpg"),
+                          ExactAssetImage("images/7.jpg"),
                         ],
                       )),
                 ),

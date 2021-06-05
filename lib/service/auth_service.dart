@@ -114,9 +114,15 @@ class AuthService {
       });
       await auth.signInWithCredential(credential);
       await getCurrentUser(context);
-    } catch (ex) {
-      show("Some Thing went Wrong");
-      print("googleAuthError" + ex.toString());
+      pushToHomePage(context);
+    } on FirebaseAuthException catch (e) {
+      if (e.credential.signInMethod == null) {
+        show("some Thing went wrong");
+      } else if (e.email == null) {
+        show("check you network");
+      }else{
+        show("check you network");
+      }
     }
     return null;
   }
@@ -132,9 +138,11 @@ class AuthService {
           FacebookAuthProvider.credential(result.token);
       await auth.signInWithCredential(facebookAuthCredential);
       await getCurrentUser(context);
+      pushToHomePage(context);
     } catch (ex) {
       print(ex.toString());
       show("Some thing went wrong");
+      show("check you network");
     }
     return null;
   }
@@ -155,5 +163,10 @@ class AuthService {
         backgroundColor: Colors.red[700],
         textColor: Colors.white,
         fontSize: 16.0);
+  }
+
+  void pushToHomePage(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 }

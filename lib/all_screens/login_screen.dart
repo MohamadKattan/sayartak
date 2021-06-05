@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sayartak/all_screens/Registr_screen.dart';
 import 'package:sayartak/all_screens/admin_panel.dart';
-import 'package:sayartak/all_screens/main_screen.dart';
 import 'package:sayartak/confige.dart';
 import 'package:sayartak/service/auth_service.dart';
 import 'package:sayartak/widget/custom_circuler_progses.dart';
@@ -128,7 +127,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             isLoading = true;
                           });
                           await _authService.signInWithGoogle(context);
-                          pushToHomePage();
+                          setState(() {
+                            isLoading = false;
+                          });
                         },
                         child: Container(
                             decoration: BoxDecoration(
@@ -148,9 +149,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           isLoading = true;
                         });
-                        await _authService
-                            .signInWithFacebook(context)
-                            .whenComplete(() => pushToHomePage());
+                        await _authService.signInWithFacebook(context);
+                        setState(() {
+                          isLoading = false;
+                        });
                       },
                       child: Container(
                           decoration: BoxDecoration(
@@ -195,13 +197,5 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.red[700],
         textColor: Colors.white,
         fontSize: 16.0);
-  }
-
-  void pushToHomePage() {
-    setState(() {
-      isLoading = false;
-    });
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 }

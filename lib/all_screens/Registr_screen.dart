@@ -9,6 +9,7 @@ import 'package:sayartak/widget/custom_text_failed.dart';
 import 'package:sayartak/confige.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 var uuid = Uuid();
 
 class RegisterScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String userPhotoId = uuid.v4();
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   AuthService _authService = AuthService();
-
+bool isloading1 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            isLoading?CustomCircular():Text(""),
+            isloading1 ? CustomCircular() : Text(""),
             SingleChildScrollView(
               controller: scrollController,
               child: Column(
@@ -117,15 +118,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: GestureDetector(
-                        onTap: () async{
+
+                        onTap: () async {
                           setState(() {
-                            isLoading=true;
+                            isloading1 = true;
                           });
-                         await checkInfoInput(context).whenComplete((){
-                           setState(() {
-                             isLoading=false;
-                           });
-                         });
+                          await checkInfoInput(context).whenComplete(() {
+                            setState(() {
+                              isloading1 = false;
+                            });
+                          });
                         },
                         child: Container(
                             decoration: BoxDecoration(
@@ -134,7 +136,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     BorderRadius.all(Radius.circular(6.0))),
                             height: 60.0,
                             child: Center(
-                                child: Text(AppLocalizations.of(context).register,
+                                child: Text(
+                                    AppLocalizations.of(context).register,
                                     style: TextStyle(color: Colors.white))))),
                   ),
                   SizedBox(
@@ -199,7 +202,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  Future<void>  checkInfoInput(BuildContext context) async{
+  Future<void> checkInfoInput(BuildContext context) async {
     if (photoFile == null) {
       show(AppLocalizations.of(context).showimage);
     }
@@ -208,14 +211,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     if (emailTextEditingController == null) {
-      show(AppLocalizations.of(context).show1,);
+      show(
+        AppLocalizations.of(context).show1,
+      );
     }
     if (passWordTextEditingController == null) {
       show(AppLocalizations.of(context).show2);
-    }else{
-
-      _authService.setPhotoUserTOStorage(photoFile,userPhotoId,context);
+    } else {
+      setState(() {
+        isloading1 = true;
+      });
+      _authService.setPhotoUserTOStorage(photoFile, userPhotoId, context);
     }
-
   }
 }
