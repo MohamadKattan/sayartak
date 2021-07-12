@@ -21,9 +21,6 @@ class _AddScreenState extends State<AddScreen> {
   final ImagePicker _picker = ImagePicker();
   GlobalKey<ScaffoldState> globalKey = GlobalKey();
   PickedFile _imageFile;
-  // List<String> imagePaths = [];
-  PickedFile _videoFile;
-  dynamic _pickImageError;
   bool installment = false;
   bool isLoading = false;
   String dropdownValue = 'select';
@@ -43,9 +40,8 @@ class _AddScreenState extends State<AddScreen> {
                     Icons.add,
                     color: Colors.white,
                   ),
-                  onPressed: ()  {
+                  onPressed: () {
                     pickImageAndVideo(ImageSource.gallery, context: context);
-                    // _shoowdialog();
                     print("addImage");
                   }),
             ],
@@ -64,41 +60,24 @@ class _AddScreenState extends State<AddScreen> {
                 SizedBox(
                   height: 15.0,
                 ),
-                _imageFile!= null
+                _imageFile != null
                     ? SizedBox(
                         height: 200,
                         child: ListView.builder(
                           itemBuilder: (context, index) {
                             return Container(
                               child: Image.file(
-                                File(_imageFile.path== null
+                                File(_imageFile.path == null
                                     ? Text("")
                                     : _imageFile.path),
                                 fit: BoxFit.fill,
                               ),
                             );
                           },
-                          itemCount:1,
+                          itemCount: 1,
                           scrollDirection: Axis.horizontal,
                         ))
                     : Text(""),
-                // _videoFile != null
-                //     ? SizedBox(
-                //         height: 200,
-                //         child: ListView.builder(
-                //           itemBuilder: (context, index) {
-                //             return Container(
-                //               child: Icon(
-                //                 Icons.play_arrow,
-                //                 size: 35.0,
-                //                 color: Colors.black,
-                //               ),
-                //             );
-                //           },
-                //           itemCount: 1,
-                //           scrollDirection: Axis.horizontal,
-                //         ))
-                //     : Container(),
                 SizedBox(
                   height: 10,
                 ),
@@ -335,41 +314,15 @@ class _AddScreenState extends State<AddScreen> {
         // imagePaths.add(pickedFile.path);
       });
     } catch (ex) {
-      setState(() {
-        _pickImageError = ex;
-      });
       print("Error getImage is:::" + ex.toString());
     }
   }
 
-// for show dialog when click video or image picker
-//   void _shoowdialog() {
-//     showDialog(
-//         context: context,
-//         builder: (BuildContext context) {
-//           return CustomDialog(
-//             title: AppLocalizations.of(context).mediapicker,
-//             text1: AppLocalizations.of(context).pickimage,
-//             text2: AppLocalizations.of(context).pickvideo,
-//             onTap: () {
-//               pickImageAndVideo(ImageSource.gallery, context: context);
-//               Navigator.pop(context);
-//             },
-//             onTap1: () {
-//               isVideo = true;
-//               pickImageAndVideo(ImageSource.camera, context: context);
-//               Navigator.pop(context);
-//             },
-//           );
-//         });
-//   }
-
-// this method for check if verbill is not null
   void checkIfFieldNotEmpty() {
     try {
       if (_imageFile == null) {
         show(AppLocalizations.of(context).showimage);
-        } else if(brandTextEditingController.text.isEmpty){
+      } else if (brandTextEditingController.text.isEmpty) {
         show("brand car can\'t be empty");
       } else if (modelTextEditingController.text.isEmpty) {
         show("Model car can\'t be empty");
@@ -410,10 +363,8 @@ class _AddScreenState extends State<AddScreen> {
         fontSize: 16.0);
   }
 
-
   Future<void> puchToPaymentScreen() async {
-
-     Navigator.push(
+    Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => PaymentScreen(
@@ -421,6 +372,5 @@ class _AddScreenState extends State<AddScreen> {
                   dropdownValue: dropdownValue,
                   installment: installment,
                 )));
-
   }
 }

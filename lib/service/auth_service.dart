@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
@@ -127,25 +126,6 @@ class AuthService {
     return null;
   }
 
-  /// faceBook
-  Future<UserCredential> signInWithFacebook(BuildContext context) async {
-    try {
-      final AccessToken result = await FacebookAuth.instance.login();
-      final userData = await FacebookAuth.instance.getUserData();
-      await usersSet.doc(result.userId).set(userData).whenComplete(
-          () => usersSet.doc(result.userId).update({"token": result.token}));
-      final FacebookAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(result.token);
-      await auth.signInWithCredential(facebookAuthCredential);
-      await getCurrentUser(context);
-      pushToHomePage(context);
-    } catch (ex) {
-      print(ex.toString());
-      show("Some thing went wrong");
-      show("check you network");
-    }
-    return null;
-  }
 
   ///this for get current user
   static Future<User> getCurrentUser(BuildContext context) async {

@@ -9,8 +9,8 @@ import 'package:sayartak/service/set_car_fireStore.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentRepo {
-  static const _urlPayment = "https://api.sandbox.checkout.com/payments";
-  static const urlToken = "https://api.sandbox.checkout.com/tokens";
+  static var _urlPayment = Uri.parse("https://api.sandbox.checkout.com/payments");
+  static var urlToken = Uri.parse("https://api.sandbox.checkout.com/tokens");
   static const _secretKey = "sk_test_60367d76-4194-48b8-bc3e-72ed5b863e76";
   static const _publicKey = "pk_test_f86de012-0b0a-4141-a371-3665278814e5";
   static const Map<String, String> _tokenHeader = {

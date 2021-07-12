@@ -6,15 +6,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-
-
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 
-    -<application
+
+ -<application
     android:icon="@mipmap/ic_launcher"
     android:label="sayartak"
     tools:replace="android:label"
+    android:requestLegacyExternalStorage="true"
     >
 
 
@@ -27,7 +31,9 @@
     android:launchMode="singleTop"
     android:showWhenLocked="true"
     android:turnScreenOn="true"
+    android:usesCleartextTraffic="true"
     >
+
 
     <!-- Specifies an Android theme to apply to this Activity as soon asthe Android process has started. This theme is visible to the userwhile the Flutter UI initializes. After that, this theme continuesto determine the Window background behind the Flutter UI. -->
 
@@ -70,7 +76,11 @@
    <category android:name="android.intent.category.BROWSABLE" />
    <data android:scheme="@string/fb_login_protocol_scheme" />
   </intent-filter>
+
+
  </activity>
+
+
 
  <!-- Don't delete the meta-data below.This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
 
@@ -79,5 +89,22 @@
         android:value="2"/>
 
 </application>
+    <queries>
+        <!-- If your app opens https URLs -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <!-- If your app makes calls -->
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+        <!-- If your app emails -->
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="*/*" />
+        </intent>
+    </queries>
 
 </manifest>

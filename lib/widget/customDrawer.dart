@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:sayartak/all_screens/favorite_screen.dart';
 import 'package:sayartak/all_screens/login_screen.dart';
@@ -111,7 +110,6 @@ class CustomDrawer extends StatelessWidget {
       await auth.signOut();
       await googleSignIn.disconnect();
       await googleSignIn.signOut();
-      await FacebookAuth.instance.logOut();
     } catch (ex) {
       print("errorGoogleSingOut::" + ex.toString());
     }

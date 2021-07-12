@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: GestureDetector(
             onLongPress: () => Navigator.push(
                 context, MaterialPageRoute(builder: (context) => AdminPanel())),
-            child: Text(AppLocalizations.of(context).login)),
+            child: Text("Welcome",style: TextStyle(color: Colors.white),)),
         centerTitle: false,
         elevation: 2.0,
       ),
@@ -41,12 +41,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 17 / 100,
+                    height: MediaQuery.of(context).size.height * 20 / 100,
                     child: Image.asset(
                       "images/splash.png",
                       fit: BoxFit.cover,
                     ),
                   ),
+                  SizedBox(height: 6.0,),
                   Padding(
                     padding: EdgeInsets.all(4.0),
                     child: Container(
@@ -60,6 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 6.0,),
                   Padding(
                     padding: EdgeInsets.all(4.0),
                     child: Container(
@@ -73,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 6.0),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: GestureDetector(
@@ -115,10 +118,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     ],
                   ),
+                  SizedBox(height: 10.0),
                   Divider(
                     color: Colors.grey,
                   ),
                   Center(child: Text(AppLocalizations.of(context).or)),
+                  SizedBox(height: 10.0),
                   Padding(
                     padding: EdgeInsets.all(4.0),
                     child: GestureDetector(
@@ -142,29 +147,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                     AppLocalizations.of(context).googlelogin,
                                     style: TextStyle(color: Colors.white))))),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: GestureDetector(
-                      onTap: () async {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        await _authService.signInWithFacebook(context);
-                        setState(() {
-                          isLoading = false;
-                        });
-                      },
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.indigo[700],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6.0))),
-                          height: 60.0,
-                          child: Center(
-                              child: Text(AppLocalizations.of(context).facebook,
-                                  style: TextStyle(color: Colors.white)))),
-                    ),
-                  )
+                  // Padding(
+                  //   padding: const EdgeInsets.all(4.0),
+                  //   child: GestureDetector(
+                  //     onTap: () async {
+                  //       setState(() {
+                  //         isLoading = true;
+                  //       });
+                  //       await _authService.signInWithFacebook(context);
+                  //       setState(() {
+                  //         isLoading = false;
+                  //       });
+                  //     },
+                  //
+                  //     // child: Container(
+                  //     //     decoration: BoxDecoration(
+                  //     //         color: Colors.indigo[700],
+                  //     //         borderRadius:
+                  //     //             BorderRadius.all(Radius.circular(6.0))),
+                  //     //     height: 60.0,
+                  //     //     child: Center(
+                  //     //         child: Text(AppLocalizations.of(context).facebook,
+                  //     //             style: TextStyle(color: Colors.white)))),
+                  //   ),
+                  // )
                 ],
               ),
             ),
